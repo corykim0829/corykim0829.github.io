@@ -6,7 +6,7 @@
    Typography
    ========================================================================== */
 
-$doc-font-size: 16 !default;
+$doc-font-size: 15 !default;
 
 /* paragraph indention */
 $paragraph-indent: false !default; // true, false (default)
@@ -39,8 +39,8 @@ $type-size-2: 1.793em !default; // ~31.248px
 $type-size-3: 1.393em !default; // ~25.008px
 $type-size-4: 1.12em !default; // ~20px
 $type-size-5: 0.9em !default; // ~16px
-$type-size-6: 0.58em !default; // ~12px
-$type-size-7: 0.5275em !default; // ~11px
+$type-size-6: 0.75em !default; // ~12px
+$type-size-7: 0.6875em !default; // ~11px
 $type-size-8: 0.625em !default; // ~10px
 
 /*
@@ -62,7 +62,7 @@ $border-color: $lighter-gray !default;
 $form-background-color: $lighter-gray !default;
 $footer-background-color: $lighter-gray !default;
 
-$primary-color: #6f777d !default;
+$primary-color: #f7f31b !default;
 $success-color: #3fa63f !default;
 $warning-color: #d67f05 !default;
 $danger-color: #ee5f5b !default;
@@ -86,7 +86,7 @@ $foursquare-color: #0072b1 !default;
 $github-color: #171516 !default;
 $gitlab-color: #e24329 !default;
 $google-plus-color: #dd4b39 !default;
-$instagram-color: #517fa4 !default;
+$instagram-color: #e92d7b !default;
 $lastfm-color: #d51007 !default;
 $linkedin-color: #007bb6 !default;
 $mastodon-color: #2b90d9 !default;
