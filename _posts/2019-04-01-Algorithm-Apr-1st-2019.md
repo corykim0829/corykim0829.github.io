@@ -64,3 +64,4 @@ subscript let us can access code with bracket `[]`
 8 * 8 의 체스판 만들기
 
 문제를 잘못이해하여 다시 접근해야한다.
+
