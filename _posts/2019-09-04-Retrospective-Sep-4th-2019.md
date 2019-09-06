@@ -32,7 +32,9 @@ tags:
   <a href="http://securecoding.software/main.php">소개딩 홈페이지</a>
 </p>
 
-<img align="center" src="https://cfile1.onoffmix.com/attach/CeY1x4l2J6ZVOAhsmL8QHTE9cpoy3Nfk" width="500" >
+<p>
+  <img src="https://cfile1.onoffmix.com/attach/CeY1x4l2J6ZVOAhsmL8QHTE9cpoy3Nfk" width="500" >
+</p>
 
 <br/>
 
