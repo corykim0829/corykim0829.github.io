@@ -1,8 +1,8 @@
 ---
 title: "[Git] remote에 push 되버린 파일에 .gitignore 적용하기"
 header:
-  teaser: /assets/images/related-to-development.jpeg
-  overlay_image: /assets/images/related-to-development.jpeg
+  teaser: /assets/images/related-to-development.jpg
+  overlay_image: /assets/images/related-to-development-h.jpeg
   overlay_filter: 0.2
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 categories:
