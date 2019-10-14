@@ -116,7 +116,7 @@ tags:
 
 ### 개발 진행 중, 문제점
 
->I hate you, Dynamic
+>너무 어려운 Dynamic Cell
 
 collectionView에서 Dynamic하게 containerView의 크기를 조절하고 싶었지만, 맘처럼 되지 않았다. 이전에 들었던 강의에서 사용한 방법을 적용했지만 UITextView에 한하여 적용되는 코드였다.
 
@@ -158,13 +158,13 @@ collectionView나 tableView는 정말 자주 쓰이기 때문에 더 공부해�
 
 
 
-> Darn it, WebKit
+> WebKit
 
 믿었던 WebKit의 배신... 그저 url을 띄우는 webView를 만들었는데, 중간중간 버벅거리면서 웹페이지가 뜨지 않았다. 근데 이게 웃긴데 어느 페이지는 잘 뜨고 어느 페이지는 잘 뜨지 않아서 너무 짜증이 났다. 결국 해결하지는 못했고 시연할 때 버벅거려서 너무 아쉬웠다.
 
 
 
-> Hurry up! bro!
+> 간단한 UI 작업
 
 마지막에 급하게 만들어서 일까, 마음대로 컨텐츠들의 크기나 비율을 조절하기 어려웠다.
 
