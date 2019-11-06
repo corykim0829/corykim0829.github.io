@@ -6,7 +6,7 @@ header:
   overlay_filter: 0.2
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 categories:
-  - Related to Development
+  - Development
 tags:
   - Development
   - Git
