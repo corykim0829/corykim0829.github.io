@@ -113,11 +113,41 @@ chore는 이제까지 그냥 잡다한 작업을 처리하는 줄 알고 code �
 
 여태까지 `git commit -m` 명령어를 사용하여서 간단하게 title만 써서 commit을 해왔는데요. 위에서 언급한 body와 footer도 같이 쓸 수 있는 방법을 찾아보았습니다.
 
-deafult는 vim으로 commit 메세지를 작성해야한다.
+`git add` 후에 `git commit` 를 치고 엔털르 치면 vim으로 전환이되는데요. git의 commit message struct 수정 deafult는 vim으로 다른 editor로도 수정이 가능합니다.
+
+vim은 에디터 중 하나로, 크게 다음 모드가 있습니다:
+
+- 일반 모드: `esc`
+- 입력 모드: `i`
+- 비주얼 모드: `v`
+- ex 모드: `:`
 
 
 
-esc
+처음에 vim에 들어가게 되면 일반 모드로 들어가지는데, 여기서 입력을 하기위해 i를 입력합니다. 그러면 경로에서 아래와 같은 메세지가 가장 하단에 출력됩니다.
+
+```
+-- INSERT --
+```
+
+여기서 이제 위에서 나온 가이드라인에 맞게 title, body, footer를 공백 line으로 구분하여 작성을 하면 됩니다.
+
+
+
+작성을 완료했다면, esc를 눌러 일반 모드로 돌아가서 `:wq` 를 입력하고 엔터를 치면 write & quite가 실행된다. 즉 저장하고 vim이 종료됩니다.
+
+- `:q!` - 저장하지 않고 종료
+- `:w!` - 파일을 덮어쓰기
+
+
+
+정상적으로 저장하고 종료가 되었다면 commit을 push할 수 있게된다. push를 하면 github 에는 다음과 같이 log가 남는다.
+
+<p align="left">
+  <img src="/assets/images/2019-11-06-git-1.png" width="400px">
+</p>
+
+body와 footer가 추가되면 기존 커밋 log에서 더보기 버튼을 누르면 확인할 수 있다.
 
 
 
@@ -125,3 +155,4 @@ esc
 
 - [Udacity Git Commit Message Style Guide](https://udacity.github.io/git-styleguide/)
 - [Git의 기초 - 수정하고 저장소에 저장하기](https://git-scm.com/book/ko/v1/Git의-기초-수정하고-저장소에-저장하기)
+- [vim기초](https://nolboo.kim/blog/2016/11/15/vim-for-beginner/)
