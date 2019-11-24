@@ -15,11 +15,11 @@
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
+locale                   : "ko"
 title                    : "To the C"
 title_separator          : "-"
 name                     : "Cory Kim"
-description              : "아름다운 앱을 만드는게 행복한 iOS 개발자"
+description              : "디자인을 사랑하는 iOS 개발자"
 url                      : "https://corykim0829.github.io"
 baseurl                  : ""
 repository               : "corykim0829/corykim0829.github.io"
@@ -107,8 +107,8 @@ analytics:
 # Site Author
 author:
   name             : "Cory Kim"
-  avatar           : "/assets/images/profile-img.png"
-  bio              : "To be an artistic iOS developer."
+  avatar           : "/assets/images/profile-img2.jpeg"
+  bio              : "디자인을 사랑하는 iOS 개발자"
   location         : "South Korea"
   email            : "corykim0829@gmail.com"
   links:
