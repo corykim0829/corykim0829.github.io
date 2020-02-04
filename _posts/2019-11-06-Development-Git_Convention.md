@@ -13,11 +13,11 @@ tags:
 
 ---
 
-git commit message guide와 이를 위한 commit 방법을 공부해보자.
+git commit message guide와 commit 방법
 
 
 
-### Udacity Git Commit Message Style Guide 해석
+## Udacity Git Commit Message Style Guide (해석)
 
 Udacity에서 사용하는 git commit msg style이다.
 
@@ -54,6 +54,8 @@ footer
 - refactore: 제품 코드 리팩토링
 - test: 테스트 추가, 테스트 리팩토링; 제품 코드 변경 X
 - chore: 빌드 작업 업데이트, 패키지 매니저 config 등; 제품 코드 변경 X
+
+chore는 이제까지 그냥 잡다한 작업을 처리하는 줄 알았는데, 다른 작업을 위한 type이었다.
 
 #### 주제: the subject
 
@@ -105,46 +107,48 @@ See also: #456, #789
 
 
 
-chore는 이제까지 그냥 잡다한 작업을 처리하는 줄 알고 code 수정을 하면 안되는 그런 type이여서 놀랐다.
+## How to commit
 
+여태까지 `git commit -m` 명령어를 사용하여서 간단하게 한줄로 요약하여 commit과 함께 메세지를 남겨왔다. 위에서 언급한 body와 footer도 같이 쓸 수 있는 방법을 찾아보았다.
 
+`git add` 명령어를 통해 변경사항이 stage에 올라와있는 상태에서 아래와 같이 commit 명령어에 별다른 옵션을 주지 않고 `Enter`를 치면 된다.
 
-### How to commit
+```
+$ git commit
+```
 
-여태까지 `git commit -m` 명령어를 사용하여서 간단하게 title만 써서 commit을 해왔는데요. 위에서 언급한 body와 footer도 같이 쓸 수 있는 방법을 찾아보았습니다.
+여기서 vim으로 전환된다. git의 commit message struct 수정 deafult editor는 vim으로 설정되었다. 하지만 설정을 하면 다른 editor로도 수정이 가능하다.
 
-`git add` 후에 `git commit` 를 치고 엔털르 치면 vim으로 전환이되는데요. git의 commit message struct 수정 deafult는 vim으로 다른 editor로도 수정이 가능합니다.
-
-vim은 에디터 중 하나로, 크게 다음 모드가 있습니다:
+vim은 에디터 중 하나로, 대표적인 모드는 다음과 같다.
 
 - 일반 모드: `esc`
 - 입력 모드: `i`
 - 비주얼 모드: `v`
 - ex 모드: `:`
 
+<br>
 
-
-처음에 vim에 들어가게 되면 일반 모드로 들어가지는데, 여기서 입력을 하기위해 i를 입력합니다. 그러면 경로에서 아래와 같은 메세지가 가장 하단에 출력됩니다.
+처음에 vim에 들어가게 되면 일반 모드로 들어가지는데, 여기서 입력을 하기위해 i를 입력한다. 그러면 경로에서 아래와 같은 메세지가 가장 하단에 출력된다.
 
 ```
 -- INSERT --
 ```
 
-여기서 이제 위에서 나온 가이드라인에 맞게 title, body, footer를 공백 line으로 구분하여 작성을 하면 됩니다.
+여기서 이제 위에서 나온 가이드라인에 맞게 title, body, footer를 공백 line으로 구분하여 작성을 하면 된다.
 
+<br>
 
-
-작성을 완료했다면, esc를 눌러 일반 모드로 돌아가서 `:wq` 를 입력하고 엔터를 치면 write & quite가 실행된다. 즉 저장하고 vim이 종료됩니다.
+작성을 완료했다면, esc를 눌러 일반 모드로 돌아가서 `:wq` 를 입력하고 엔터를 치면 write & quite가 실행된다. 즉 저장하고 vim이 종료된다.
 
 - `:q!` - 저장하지 않고 종료
 - `:w!` - 파일을 덮어쓰기
 
-
+<br>
 
 정상적으로 저장하고 종료가 되었다면 commit을 push할 수 있게된다. push를 하면 github 에는 다음과 같이 log가 남는다.
 
 <p align="left">
-  <img src="/assets/images/2019-11-06-git-1.png" width="400px">
+  <img src="/assets/images/2019-11-06-git-1.png" width="640px">
 </p>
 
 body와 footer가 추가되면 기존 커밋 log에서 더보기 버튼을 누르면 확인할 수 있다.
