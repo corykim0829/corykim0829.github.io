@@ -51,7 +51,7 @@ footer
 - fix: 버그를 고침
 - docs: 문서를 수정
 - style: 포맷, 빠진 세미 콜론 등; 코드 변경 X
-- refactore: 제품 코드 리팩토링
+- refactor: 제품 코드 리팩토링
 - test: 테스트 추가, 테스트 리팩토링; 제품 코드 변경 X
 - chore: 빌드 작업 업데이트, 패키지 매니저 config 등; 제품 코드 변경 X
 
