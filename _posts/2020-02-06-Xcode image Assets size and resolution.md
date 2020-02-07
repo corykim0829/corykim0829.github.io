@@ -16,7 +16,7 @@ Xcode 프로젝트 Assets에 넣은 이미지 사이즈와 해상도 설정
 
 <br>
 
-배경을 패턴으로 지정하려고 하는데, 해상도 문제로 고민하다 정리하게 되었다.
+배경을 패턴으로 지정하려고 하는데, 해상도 문제로 고민하다 정리하게 되었다. 
 
 ### Image Size and Resolution in HIG - 번역
 
@@ -29,6 +29,13 @@ iOS가 화면에 UIView 클래스와 같은 컨텐츠를 배치하는 데 사용
 예를 들어, `100px x 100px`의 표준 화질 이미지가 있다고 하자. `@2x` 버전의 이미지는 `200px x 200px`이고 `@3x` 버전의 이미지는 `300px x 300px` 이여야한다.
 
 앱에 있는 모든 artwork에 앱이 지원하는 모든 디바이스의 고화질 이미지를 제공해야한다. 디바이스에 따라 각 이미지의 픽셀 수에 특정 배율을 곱하면 된다.
+
+<br>
+
+- iOS의 좌표 시스템 포인트 단위 기반
+- 디스플레이의 픽셀에 매핑해야한다.
+- 매핑 scale은 `@1x`, `@2x`, `@3x` 가 있다.
+- 기기마다 지원하는 scale이 있다.
 
 ---
 
@@ -60,6 +67,10 @@ iOS가 화면에 UIView 클래스와 같은 컨텐츠를 배치하는 데 사용
 	<img src="https://i.stack.imgur.com/QcuUy.jpg" width = "400px">
 </p>
 
+---
+
+HIG에 명시된 iOS에서의 Image 크기와 해상도에 대해서 알아본 뒤 실제로 패턴이미지를 사용한 배경색깔 지정을 시도해 보았다.
+
 ### UIColor
 
 > init(patternImage:)
@@ -69,7 +80,7 @@ let patternColor = UIColor(patternImage: #UIImage)
 view.backgroundColor = patternColor
 ```
 
-위와 같이 설정하면 패턴으로 설정이된다. 사용되는 UIImage의 사이즈나 해상도에 관한 언급이 문서에 없어 패턴 크기를 더 자잘하게 만들 수는 없을까를 고민했다.
+위와 같이 설정하면 패턴으로 설정이된다. 사용되는 UIImage의 사이즈나 해상도에 관한 언급이 문서에 없어 패턴 크기를 더 작게 만들 수는 없을까를 고민했다.
 
 UIImage를 패턴으로 만들기 때문에 UIImage 자체 사이즈를 줄이면 될 것 같다 싶어, UIImage 사이즈를 조절하는 코드를 찾아보았고, CGContext를 사용하여 UIImage 사이즈를 조절해보았다.
 
@@ -89,9 +100,7 @@ extension UIImage {
 
 원하던 더 자잘한 패턴을 결과로 얻었지만 테두리가 조금 여백이 생긴 것처럼 어색해졌다.
 
-<br>
-
-> Assets.xcassets
+#### Assets.xcassets scale 설정
 
 Assets에 기본적으로 추가하면 이미지의 scale 설정은 `@1x`로 올라가 있어 이를 변경해 보았다. 
 
@@ -102,7 +111,11 @@ Assets에 기본적으로 추가하면 이미지의 scale 설정은 `@1x`로 올
 	<img src="/assets/images/image-size-res/image-size-res2.jpeg" width = "800px">
 </p>
 
-결과는 성공적이었다. `@2x` 기기와 `@3x` 기기 간의 큰 차이는 확인할 수는 없었다.
+결과는 성공적이었다. `@2x` 기기와 `@3x` 기기 간의 큰 차이는 확인할 수는 없었다.  기본적으로 설정이 `@1x`로 되어있어 `@2x`
+
+, `@3x` 지원 기기로 upscaling 되는 거는 이해가 되는데, 두 기기간 차이가 없으니 이해가 되지를 않는다.
+
+결론은 패턴 이미지 사이즈 조절은 이미지 사이즈 자체를 조절하는게 편하다.
 
 <br>
 
