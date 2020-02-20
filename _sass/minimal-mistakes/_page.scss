@@ -94,11 +94,14 @@
     }
   }
 
-  ul > ul,
   ol > ol,
   ul > ol,
   ol > ul {
     font-size: 0.85em;
+  }
+
+  ul > ul {
+    font-size: 0.95em;
   }
 
   a:not(.btn) {
