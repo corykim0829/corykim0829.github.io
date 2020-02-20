@@ -20,10 +20,10 @@ iOS의 Design pattern, Delegation은 무엇인가?
 
 Delegate의 사전적 의미는 "특정한 일, 의무, 권리 등을 나 대신 할 수 있는 사람에게 주는 것"이다. Delegation의 사전적 의미는 "다른 사람을 위해 하는 행동을 부여하는 것"이라고 등재되어있다.
 
-Delegation은 하나의 객체가 프로그램에서 다른 객체를 대신하여 동작하거나 다른 객체와 함께 동작하는 간단하며 강력한 패턴이다. Delegation을 사용할 때는 보통 두개의 객체가 필요하다. 위임을 할 수 있는 객체인 **Delegating Object**, 그리고 위임받아 일을 대신해서 처리할 **Delegate**이다. 이러한 Delegation은 특정한 행동에 대응하거나 해당 소스의 기본 타입을 몰라도 외부 소스로부터 data를 가져올 때 사용된다.
+Delegation은 하나의 객체가 프로그램에서 다른 객체를 대신하여 동작하거나 다른 객체와 함께 동작하는 간단하며 강력한 패턴이다. Delegation을 사용할 때는 보통 두개의 객체가 필요하다. 위임을 할 수 있는 객체인 **Delegating Object**, 그리고 위임받아 일을 대신해서 처리할 **Delegate**이다. 이러한 Delegation은 특정 행동에 반응하거나 해당 소스를 알 필요 없이 외부 소스로부터 data를 가져올 때 사용될 수 있다.
 
-- **Delegating Object** : 직역하면 위임 객체, 위임할 수 있는 delegate 프로퍼티를 가지고 있다.
-- **Delegate** : 대리자는 protocol로 캡슐화된 작업들을 채택한다.
+- **Delegating Object** : 직역하면 위임 객체이며, 위임할 수 있는 delegate 프로퍼티를 가지고 있다.
+- **Delegate** : 대리자는 protocol로 캡슐화된 작업들을 채택하며, Delegating Object의 일을 대신 처리할 수 있다.
 
  **Delegating object**는 다른 **delegate 객체**에 참조를 유지하고 적절한 때에 **delegate 객체**에게 **메세지**를 보낸다. 메세지는 **Delegating object**가 처리할 예정이거나 처리된 이벤트를 전달한다. **delegate**는 보여지는 부분, 앱 안의 자신 또는 다른 객체들의 상태를 업데이트하여 메세지에 응답 할 수 있다. 때로는 값을 리턴할 수 있는데, 그 값은 걸쳐진 이벤트가 어떻게 처리되는 지에 영향을 주기도 한다. Delegation의 가장 큰 장점은 하나의 객체에서 여러 객체의 동작을 쉽게 커스터마이징할 수 있게 해준다는 것이다.
 
@@ -42,7 +42,7 @@ Delegation은 하나의 객체가 프로그램에서 다른 객체를 대신하�
 
 #### Delegation and Notification
 
-위에 예시로 설명했던 것을 Notification을 사용해서 설명해본다면, Cocoa framework 클래스의 대부분의 **delegate**는 delegating object이 작성한 notification의 **observer**로 자동적으로 등록이된다. **delegate**는 **특정 notification 메세지**를 받기 위해 framework 클래스에 의해 선언된 notification 메소드를 구현만하면 된다. 위 그림에서, window 객체는 `NSWindowWillCloseNotification`을 observer에게 보내지만, 결국에는 `windowShouldClose` 메세지를 delegate에게 보내는 원리이다.
+Cocoa framework 클래스의 대부분의 **delegate**는 delegating object가 작성한 notification의 **observer**로 자동적으로 등록이된다. **delegate**는 **특정 notification 메세지**를 받기 위해 framework 클래스에 의해 선언된 notification을 처리하는 notification 메소드를 구현하면 된다. 위 그림에서, Delegating object인 window 객체는 `NSWindowWillCloseNotification`을 observer에게 보내는 것은 결국 `windowShouldClose` 메세지를 delegate에게 보내는 원리이다.
 
 #### Data Source
 
