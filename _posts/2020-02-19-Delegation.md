@@ -25,15 +25,15 @@ Delegation은 하나의 객체가 프로그램에서 다른 객체를 대신하�
 - **Delegating Object** : 직역하면 위임 객체이며, 위임할 수 있는 delegate 프로퍼티를 가지고 있다.
 - **Delegate** : 대리자는 protocol로 캡슐화된 작업들을 채택하며, Delegating Object의 일을 대신 처리할 수 있다.
 
- **Delegating object**는 다른 **delegate 객체**에 참조를 유지하고 적절한 때에 **delegate 객체**에게 **메세지**를 보낸다. 메세지는 **Delegating object**가 처리할 예정이거나 처리된 이벤트를 전달한다. **delegate**는 보여지는 부분, 앱 안의 자신 또는 다른 객체들의 상태를 업데이트하여 메세지에 응답 할 수 있다. 때로는 값을 리턴할 수 있는데, 그 값은 걸쳐진 이벤트가 어떻게 처리되는 지에 영향을 주기도 한다. Delegation의 가장 큰 장점은 하나의 객체에서 여러 객체의 동작을 쉽게 커스터마이징할 수 있게 해준다는 것이다.
+ **Delegating object**는 다른 **delegate 객체**에 참조를 유지하고 적절한 때에 **delegate 객체**에게 **메세지**를 보낸다. 메세지는 **Delegating object**가 처리할 예정이거나 처리된 이벤트를 전달한다. **delegate**는 보여지는 부분, 앱 안의 자신 또는 다른 객체들의 상태를 업데이트하여 메세지에 응답 할 수 있다. 때로는 값을 리턴할 수 있는데, 그 값은 걸쳐진 이벤트가 어떻게 처리되는 지에 영향을 주기도 한다. Delegation의 가장 큰 장점은 하나의 중심 객체에서 여러 객체의 동작을 쉽게 커스터마이징할 수 있게 해준다는 것이다.
 
 <br>
 
 #### Delegation and the Cocoa Frameworks
 
-**Delegating object**는 보통 프레임워크 객체이고, **delegate**는 보통 커스텀 컨트롤러 객체이다. 메모리가 잘 관리되는 환경에서는, **delegating object는 약한 참조를 delegate에 유지한다.** garbage-collected 환경에서는, receiver는 강한 참조를 delegate에 유지한다. Delegation 예제는 Foundation, UIKit, AppKit, 그리고 다른 Cocoa, Cocoa Touch 프레임워크에 많이 있습니다.
+**Delegating object**는 보통 프레임워크 객체이고, **delegate**는 보통 커스텀 컨트롤러 객체이다. Swift의 ARC와 같은 메모리가 관리되는 환경에서는, 강한 순환 참조를 방지하기 위해 **delegating object는 약한 참조를 delegate에 유지한다.** garbage-collected 환경에서는, receiver는 강한 참조를 delegate에 유지한다고 한다.(명확한 이유와 원리는 모르겠다.) Delegation 예제는 Foundation, UIKit, AppKit, 그리고 다른 Cocoa, Cocoa Touch 프레임워크에 많이 있다.
 
-**Delegating object**의 에시로 AppKit 프레임워크의 `NSWindow` 클래스의 인스턴스라고 하자. `NSWindow`는 `windowShouldClose:`라는 메소드를 가지고 있는 프로토콜(`NSWindowDelegate`)을 선언한다. 사용자가 윈도우의 닫기를 클릭하면, 윈도우 객체는 `windowShouldClose:` 를 **delegate**에 보내서 윈도우 객체의 닫기를 확인하도록 요청한다. 보통 커스텀 컨트롤러인 delegate는 Boolean 값을 리턴하여 윈도우 객체의 동작을 대신하여 처리한다. 프로토콜에 있는 `windowShouldClose:` 안에 커스텀하게 구현을 하여 현재 상황에 맞게 값을 리턴할 수 있다.
+**Delegating object**의 예시로 AppKit 프레임워크의 `NSWindow` 클래스의 인스턴스라고 하자. `NSWindow`는 `windowShouldClose:`라는 메소드를 가지고 있는 프로토콜(`NSWindowDelegate`)을 선언한다. 사용자가 윈도우의 닫기를 클릭하면, 윈도우 객체는 `windowShouldClose:` 를 **delegate**에 보내서 윈도우 객체의 닫기를 확인하도록 요청한다. 보통 커스텀 컨트롤러인 delegate는 Boolean 값을 리턴하여 윈도우 객체의 동작을 대신하여 처리한다. 프로토콜에 있는 `windowShouldClose:` 안에 커스텀하게 구현을 하여 현재 상황에 맞게 값을 리턴할 수 있다.
 
 - Delegating Object : 프레임워크 객체
 - Delegate : 커스텀 컨트롤러 객체
@@ -74,7 +74,7 @@ class SecondViewController: UIViewController, UIImagePickerControllerDelegate, U
 }
 ```
 
-일반적으로 viewController가 delegate역할을 하게 되며, UIImagePickerController의 일을 처리하기 위해서 `UIImagePickerControllerDelegate`, `UINavigationControllerDelegate` 두개를 태책한다.
+일반적으로 viewController가 delegate역할을 하게 되며, UIImagePickerController의 일을 처리하기 위해서 `UIImagePickerControllerDelegate`, `UINavigationControllerDelegate` 두개를 채택한다.
 
 `func imagePickerController`는 프로토콜에 정의된 함수로 `UIImagePickerController`의 특정 행동을 처리한다.
 
@@ -116,8 +116,15 @@ delegating object와 delegate가 상당히 헷갈리는 부분이기도 하여�
 
 <br>
 
+#### 피드백 주신 고마운 분들
+
+- Lena
+
+<br>
+
 #### References
 
 - [Swift 5.2 - Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-ID276)
 - [Delegation - Apple Developer](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Delegation.html)
 - [Understanding Delegates and Delegation in Swift 4](https://www.appcoda.com/swift-delegate/)
+- [Garbage Collection vs Automatic Reference Counting](https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81)
