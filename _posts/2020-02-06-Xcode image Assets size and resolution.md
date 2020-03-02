@@ -66,7 +66,6 @@ iOS가 화면에 UIView 클래스와 같은 컨텐츠를 배치하는 데 사용
 <p align="center">
 	<img src="https://i.stack.imgur.com/QcuUy.jpg" width = "400px">
 </p>
-
 ---
 
 HIG에 명시된 iOS에서의 Image 크기와 해상도에 대해서 알아본 뒤 실제로 패턴이미지를 사용한 배경색깔 지정을 시도해 보았다.
