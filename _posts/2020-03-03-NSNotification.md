@@ -31,11 +31,8 @@ Notification을 사용하기 위해서는 먼저 오브젝트를 notification의
 일반적인 구현 순서는 다음과 같다.
 
 - Notification observer 등록
-
 - Responding method 구현
-
 - Notification을 발송할 객체에 post 메소드 구현
-
 
 <br>
 
