@@ -128,4 +128,4 @@ protocol Container {
 
 #### The Original Document
 
-[Associated Types in Swift document](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID189)
+- [Associated Types in Swift document](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID189)
