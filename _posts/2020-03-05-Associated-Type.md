@@ -10,7 +10,7 @@ tags:
   - Associated Type
 ---
 
-타입없는 타입, Associated type에 대해서 알아보자
+타입의 placeholder, Associated type에 대해서 알아보자
 
 <br>
 
@@ -79,7 +79,7 @@ typealias Item = Int
 
 위 정의는 `Container` 프로토콜 정의에 있어 `Item`의 **추상 타입(the abstract type)**을 `Int`라는 **하나의 구체적인 타입(a concrete type)**으로 바꾼다.
 
-Swift의 타입 추론 덕분에, `Int` 타입의 하나의 구체적인 `Item`을 꼭 `IntStack` 정의로 선언할 필요는 없다. `IntStack`이 `Container` 프로토콜의 필수요건들 전부를 채택하기 때문에, Swift는 `append(_:)` 메소드의 파라미터와 subscript의 리턴타입을 간단히 보는 것만으로도 사용하기 적절한 `Item`을 추론할 수 있다. 실제로, `typealias Item = Int` 코드라인을 지우게 되면, 모든게 정상적으로 작동하는데, 그 이유는 어떤 타입이 Item으로 사용될지 명확하기 때문이다.
+사실 Swift의 타입 추론 덕분에, 구체적으로 `Item`이 `Int`타입이라고 `IntStack`의 정의 부분에 선언할 필요는 없다. `IntStack`이 `Container` 프로토콜의 필수기능들을 전부를 채택하기 때문에, Swift는 `append(_:)` 메소드의 파라미터와 subscript의 리턴타입을 간단히 보는 것만으로도 사용하기 적절한 `Item`을 추론할 수 있다. 실제로, `typealias Item = Int` 코드라인을 지우게 되면, 모든게 정상적으로 작동하는데, 그 이유는 어떤 타입이 Item으로 사용될지 명확하기 때문이다.
 
 <br>
 
@@ -111,7 +111,7 @@ extension Array: Container {}
 
 ### Adding Constraints to an Associated Type
 
-프로토콜의 associated type에 '타입 제한'을 추가하여 적합한 타입이 해당 제한 조건을 충족하도록 요구할 수 있다. 예를 들어, 아래 코드는 item은 container에서 equatable하게 `Container`에서 정의되어있다.
+프로토콜의 associated type에는 **'타입 제약(type constraints)'**을 추가할 수 있다. Associated type에 들어오게 될 타입은 명시된 제약 조건을 충족해야한다. 예를 들어, 아래 코드는 item은 container에서 `Equatable`을 채택한 타입만 사용되게 `Container`에서 정의되어있다. Equatable을 채택하지 않은 타입을 associated type에 지정하게 되면 컴파일 에러가 발생한다.
 
 ```swift
 protocol Container {
