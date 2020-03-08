@@ -124,3 +124,8 @@ protocol Container {
 
 이 `Container` 버전을 채택하려면, container의 `Item` 타입은 `Equatable` 프로토콜을 채택해야한다.
 
+<br>
+
+#### The Original Document
+
+[Associated Types in Swift document](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID189)
