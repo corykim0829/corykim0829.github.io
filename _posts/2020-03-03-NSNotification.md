@@ -1,5 +1,5 @@
 ---
-title: "[iOS] NSNotification, an Object of Notification"
+title: "[iOS] Notification, an Instance of NSNotification"
 header:
   teaser: /assets/images/ios-posts2.jpeg
   overlay_image: /assets/images/ios-posts2.jpeg
@@ -15,8 +15,11 @@ tags:
 
 Observer Pattern의 Notification에서 주고받는 notification object인 NSNotification에 대해서 살펴보자
 
-먼저 iOS의 observer pattern의 notification 메커니즘을 알고 있어야 NSNotification을 더 깊게 이해할 수 있다.
-[**Observer pattern, notification이란?**](https://corykim0829.github.io/ios/Observer-Pattern-Notification/)
+#### 들어가기 전에...
+
+iOS의 observer pattern의 notification 메커니즘을 알고 있어야 NSNotification을 더 깊게 이해할 수 있다. 아래 글을 읽고 오면 더욱 이해하는데 도움이 될 것이다.
+
+- [**Observer pattern, notification**](https://corykim0829.github.io/ios/Observer-Pattern-Notification/)
 
 <br>
 
@@ -38,9 +41,9 @@ Notification을 사용하기 위해서는 먼저 오브젝트를 notification의
 
 ## The Notification Object
 
-Notification 메커니즘에서 오브젝트 사이에서 보내지는 **notification**은 **오브젝트**로, `NSNotification`의 인스턴스이다. 이 오브젝트에는 이벤트의 정보가 캡슐화되어있는데, 예를 들면 창을 선택하거나 네트워크 연결이 닫힐 때의 이벤트가 있다. 이벤트가 발생되면, 해당 이벤트를 발생된 오브젝트에서 notification center에 notification을 발송한다. 그리고 notification center는 즉시 등록된 모든 오브젝트에게 notification을 날린다. 등록된 오브젝트는 observer로 notification을 관찰하고 있는 오브젝트들이다.
+Notification 메커니즘에서 오브젝트 사이에서 보내지는 **notification**은 **오브젝트**로, `NSNotification`의 인스턴스이다. 이 오브젝트에는 이벤트의 정보가 캡슐화되어있는데, 예를 들면 창을 선택하거나 네트워크 연결이 닫힐 때의 이벤트가 있다. 이벤트가 발생되면, 해당 이벤트를 처리하는 오브젝트는 **notification center**에 **notification**을 발송한다. 그리고 notification center는 즉시 등록된 모든 오브젝트에게 notification을 날린다. 등록된 오브젝트는 observer로 notification을 관찰하고 있는 오브젝트들이다.
 
-NSNotification 오브젝트에는 `name`, `object` 그리고 선택적으로 `dictionary`를 포함하고있다. `name`은 notification을 식별하는 태그이다. `object`는 notification 발송자가 해당 notification의 observer에게 보내고 싶은 어떤 `object`든지 가능하다.(보통 notification을 발송한 오브젝트이다.) dictionary에는 이벤트와 관련된 정보를 저장한다.
+**`NSNotification` 오브젝트**에는 `name`, `object` 그리고 선택적으로 `dictionary`를 포함하고있다. `name`은 notification을 식별하는 태그이다. `object`는 notification 발송자가 해당 notification의 observer에게 보내고 싶은 어떤 `object`든지 가능하다.(보통 notification을 발송한 오브젝트이다.) dictionary에는 이벤트와 관련된 정보를 저장한다.
 
 <br>
 
@@ -56,7 +59,14 @@ class NSNotification : NSObject
 - `var object: Any?` - Notification 관련 오브젝트
 - `var userInfo: [AnyHashable: Any]?` - Notification 관련 정보를 담은 dictionary
 
+---
+
 <br>
+
+여기까지는 모두 NSNotification을 기반으로 설명되었으며 아래에는 Swift로 코드를 작성하는 방법이다.
+
+[Notification과 NSNotification의 차이점](https://corykim0829.github.io/ios/NS-classes-in-Swift/#)
+{: .notice--info}
 
 ## Notification in Observer
 
@@ -124,7 +134,7 @@ Observer 등록할 때 사용했던 동일한 `NSNotification.Name`을 사용하
 #### NSNotification.Name
 
 The type used for the name of a notification이라고 공식문서에 명시되어 있으며 sturct로 구현되어있다.
-Swift에서는 Notification 이름은 nested `NSNotification.Name` 타입을 사용한다. 
+Swift에서는 Notification 이름은 nested `NSNotification.Name` 타입을 사용한다.
 
 ```swift
 struct Name
@@ -174,9 +184,10 @@ NotificationCenter.default.addObserver(self, selector: #selector(updateStockLabe
 ```
 
 ```swift
-NotificationCenter.default.post(name: .StockNumberDidChange, 
-																object: nil,
-                                userInfo: ["changedIndex": changedIndex!,                                      																						"numberOfBeverage": changedBeverages.beverages.count])
+NotificationCenter.default.post(name: .StockNumberDidChange,
+                                object: nil,
+                                userInfo: ["changedIndex": changedIndex!,
+                                           "numberOfBeverage": changedBeverages.beverages.count])
 ```
 
 ```swift
