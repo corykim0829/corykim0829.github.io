@@ -35,7 +35,7 @@ Cocoa의 notification 메커니즘은 Observer 패턴 기반으로 **일대다(o
 
 <br>
 
-Notification을 발송하는 것은 동기적 절차이다. 발송하는 오브젝트는 notification center가 모든 observer에게 notification을 브로드캐스트하기 전까지 통제권을 갖지 못한다. 비동기 처리에서는, notification을 notification 큐에 넣을 수 있는데, 제어는 즉시 발송하는 오브젝트로 돌아가고 notification center는 큐의 가장 위에 도달하는 notification을 브로드캐스트한다.
+Notification center가 등록된 observer에게 notification을 전달하는 것은 동기적으로 처리된다. notification을 발송하는 오브젝트는 notification center가 모든 notification을 브로드캐스트하기 전까지 통제권을 돌려받지 못한다. 비동기 처리를 하기 위해서는, notification을 notification queue를 사용해야한다. Notification을 발송하는 오브젝트의 제어는 발송하는 즉시 해당 오브젝트로 돌아가며, Notification center는 큐의 가장 위에 도달하는 notification을 브로드캐스트한다.
 
 <br>
 
@@ -51,40 +51,44 @@ Notification을 발송하는 것은 동기적 절차이다. 발송하는 오브�
 
 하지만 notification을 받는 오브젝트는 이벤트가 발생한 이후에만 반응할 수 있다. 이는 delegation과 아주 큰 차이점이다. delegate는 delegating object로 부터 오는 작업을 거부하거나 수정할 기회를 갖는다. 반면에 observing object는 observed object로부터 오는 notification 작업에 직접적인 영향을 줄 수 없다.
 
-notification class에는 `NSNotification`(notification object), `NotificationCenter`(notification 발송과 observer를 추가하기 위해서), `NotificationQueue`(notification을 큐에 넣기위해서), 그리고 `DistributedNotificationCenter`
+Notification class에는 notification object인 `NSNotification`, Notification 발송과 observer 추가를 위한 `NotificationCenter`, Notification을 큐에 넣기 위한 `NotificationQueue` 그리고 `DistributedNotificationCenter`가 있다.
 
 <br>
 
-> NSNotification
+#### Notification Classes
+
+> **NSNotification**
 
 Notification에 연결되는 등록된 observer에게 브로드캐스트하는 정보를 담고있는 객체
 
-> Notification
+> **Notification**
 
-Notification center를 통해 등록된 모든 observer에게 정보를 브로드캐스트하는 컨테이너입니다. 
+Notification center를 통해 등록된 모든 observer에게 브로드캐스트되는 정보를 담는 그릇이다.
 
-> NotificationCenter
+> **NotificationCenter**
 
 notification 전송 메커니즘으로 등록된 observer에게 정보를 브로드캐스트할 수 있게 한다. 
-
 모든 실행 중인 앱은 각각의 default notification center를 가지고 있다.
 
-> NotificationQueue
+> **NotificationQueue**
 
 notification center의 버퍼
 
-> DistributedNotificationCenter
+<br>
 
-notification 전송 메커니즘으로 task boundaries를 넘어 notification을 브로드캐스트할 수 있다.
+#### 추가로 읽어보면 좋은 글
+
+- [[iOS] NSNotification, an Object of Notification](https://corykim0829.github.io/ios/NSNotification/)
 
 <br>
 
 #### References
 
 - [Cocoa Design Pattern: Observer - Apple Developer Document](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/CocoaDesignPatterns/CocoaDesignPatterns.html#//apple_ref/doc/uid/TP40002974-CH6-SW20)
+- [Communicating with Objects - Apple Developer Document](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/CommunicatingWithObjects/CommunicateWithObjects.html#//apple_ref/doc/uid/TP40002974-CH7-SW7)
 - [Observer vs Pub-Sub pattern](https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c)
 - Notification classes in Apple Developer
   - [NSNotification](https://developer.apple.com/documentation/foundation/nsnotification)
   - [NotificationCenter](https://developer.apple.com/documentation/foundation/notificationcenter)
   - [NotificationQueue](https://developer.apple.com/documentation/foundation/notificationqueue)
-  - [DistributedNotificationCenter](https://developer.apple.com/documentation/foundation/distributednotificationcenter)
+
