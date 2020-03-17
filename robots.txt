@@ -1,0 +1,7 @@
+User-agent: Googlebot
+User-agent: DAUMOA
+User-agent: NaverBot
+User-agent: ZumBot
+Allow: /
+
+Sitemap: https://corykim0829.github.io//sitemap.xml
