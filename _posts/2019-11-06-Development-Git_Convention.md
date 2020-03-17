@@ -10,7 +10,12 @@ categories:
 tags:
   - Development
   - Git
-
+layout: post
+date: 2019-11-06 12:00:00
+lastmod: 2019-11-06 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 git commit message guide와 commit 방법

@@ -10,6 +10,12 @@ tags:
   - function
   - global function
   - nested function
+layout: post
+date: 2020-02-25 12:00:00
+lastmod: 2020-02-25 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 스위프트의 함수 종류 - Global, nested function

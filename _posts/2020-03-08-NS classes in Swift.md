@@ -10,6 +10,12 @@ categories:
 tags:
   - NS
   - NS Classes
+layout: post
+date: 2020-03-08 09:00:00
+lastmod: 2020-03-08 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 Swift에서 사용되는 "NS" 출신 Classes는 어떤 원리로 사용되고 있는지 알아보자.

@@ -13,6 +13,12 @@ tags:
   - NAVER
   - HACKDAY
   - Hackathon
+layout: post
+date: 2019-11-23 12:00:00
+lastmod: 2020-11-23 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 네이버 개발자와 함께하는 해커톤, HACKDAY를 마치며 남기는 회고

@@ -8,6 +8,12 @@ categories:
   - Swift
 tags:
   - Associated Type
+layout: post
+date: 2020-03-05 12:00:00
+lastmod: 2020-03-05 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 타입의 placeholder, Associated type에 대해서 알아보자

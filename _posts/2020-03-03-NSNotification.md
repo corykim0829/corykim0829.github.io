@@ -11,6 +11,12 @@ tags:
   - Observer Pattern
   - Notification
   - NSNotification
+layout: post
+date: 2020-03-03 12:00:00
+lastmod: 2020-03-03 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 Observer Pattern의 Notification에서 주고받는 notification object인 NSNotification에 대해서 살펴보자

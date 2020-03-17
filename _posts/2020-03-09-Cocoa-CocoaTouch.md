@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "[iOS] Cocoa, Cocoa Touch"
 header:
   teaser: /assets/images/ios-posts2.jpeg
@@ -10,6 +11,11 @@ categories:
 tags:
   - Cocoa
   - Cocoa Touch
+date: 2020-03-09 12:00:00
+lastmod: 2020-03-09 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 Apple의 Cocoa 그리고 Cocoa Touch에 대해서 알아보자

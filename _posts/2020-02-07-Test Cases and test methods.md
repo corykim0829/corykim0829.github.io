@@ -9,6 +9,12 @@ categories:
   - iOS
 tags:
   - iOS
+layout: post
+date: 2020-02-07 12:00:00
+lastmod: 2020-02-07 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 유닛테스트에 사용되는 테스트 케이스와 테스트 메소드

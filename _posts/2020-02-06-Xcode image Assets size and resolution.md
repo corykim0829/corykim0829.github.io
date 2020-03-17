@@ -10,6 +10,12 @@ categories:
 tags:
   - iOS
   - H.I.G
+layout: post
+date: 2020-02-06 12:00:00
+lastmod: 2020-02-06 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 Xcode 프로젝트 Assets에 넣은 이미지 사이즈와 해상도 설정

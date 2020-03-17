@@ -13,6 +13,12 @@ tags:
   - Let'Swift
   - HACKDAY
   - Hackathon
+layout: post
+date: 2020-01-02 12:00:00
+lastmod: 2020-01-02 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 **WELCOME YOUR ARRIVAL!** 그리고 2019년 회고

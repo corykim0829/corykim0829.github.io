@@ -10,6 +10,12 @@ categories:
 tags:
   - Observer Pattern
   - Notification
+layout: post
+date: 2020-03-02 12:00:00
+lastmod: 2020-03-02 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 iOS의 Observer Pattern과 Notification에 대해서 알아보자

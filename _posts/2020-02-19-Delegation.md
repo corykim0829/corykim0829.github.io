@@ -10,6 +10,12 @@ categories:
 tags:
   - iOS
   - Delegation
+layout: post
+date: 2020-02-19 12:00:00
+lastmod: 2020-02-19 12:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 ---
 
 iOS의 Design pattern, Delegation은 무엇인가?
