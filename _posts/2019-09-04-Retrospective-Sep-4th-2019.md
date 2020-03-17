@@ -12,7 +12,6 @@ tags:
   - Swift
   - 해커톤
   - Hackathon
-layout: post
 date: 2019-09-04 12:00:00
 lastmod: 2019-09-04 12:00:00
 sitemap :

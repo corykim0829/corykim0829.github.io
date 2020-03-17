@@ -10,7 +10,6 @@ tags:
   - function
   - global function
   - nested function
-layout: post
 date: 2020-02-25 12:00:00
 lastmod: 2020-02-25 12:00:00
 sitemap :

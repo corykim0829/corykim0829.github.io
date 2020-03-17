@@ -8,7 +8,6 @@ categories:
   - Swift
 tags:
   - Associated Type
-layout: post
 date: 2020-03-05 12:00:00
 lastmod: 2020-03-05 12:00:00
 sitemap :

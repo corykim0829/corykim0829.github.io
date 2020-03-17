@@ -13,7 +13,6 @@ tags:
   - Let'Swift
   - HACKDAY
   - Hackathon
-layout: post
 date: 2020-01-02 12:00:00
 lastmod: 2020-01-02 12:00:00
 sitemap :

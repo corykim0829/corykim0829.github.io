@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "[iOS] Cocoa, Cocoa Touch"
 header:
   teaser: /assets/images/ios-posts2.jpeg

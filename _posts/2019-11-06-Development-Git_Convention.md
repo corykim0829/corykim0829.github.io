@@ -10,7 +10,6 @@ categories:
 tags:
   - Development
   - Git
-layout: post
 date: 2019-11-06 12:00:00
 lastmod: 2019-11-06 12:00:00
 sitemap :

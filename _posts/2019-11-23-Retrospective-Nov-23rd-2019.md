@@ -13,7 +13,6 @@ tags:
   - NAVER
   - HACKDAY
   - Hackathon
-layout: post
 date: 2019-11-23 12:00:00
 lastmod: 2020-11-23 12:00:00
 sitemap :

@@ -10,7 +10,6 @@ categories:
 tags:
   - Observer Pattern
   - Notification
-layout: post
 date: 2020-03-02 12:00:00
 lastmod: 2020-03-02 12:00:00
 sitemap :

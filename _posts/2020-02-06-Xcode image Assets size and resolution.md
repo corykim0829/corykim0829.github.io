@@ -10,7 +10,6 @@ categories:
 tags:
   - iOS
   - H.I.G
-layout: post
 date: 2020-02-06 12:00:00
 lastmod: 2020-02-06 12:00:00
 sitemap :

@@ -10,7 +10,6 @@ categories:
 tags:
   - NS
   - NS Classes
-layout: post
 date: 2020-03-08 09:00:00
 lastmod: 2020-03-08 12:00:00
 sitemap :

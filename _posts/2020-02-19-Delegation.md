@@ -10,7 +10,6 @@ categories:
 tags:
   - iOS
   - Delegation
-layout: post
 date: 2020-02-19 12:00:00
 lastmod: 2020-02-19 12:00:00
 sitemap :
