@@ -36,17 +36,22 @@ sitemap :
 
 ### git rebase -i
 
+```
 -i
 --interactive
-Make a list of the commits which are about to be rebased. Let the user edit that list before rebasing. This mode can also be used to split commits (see SPLITTING COMMITS below).
+Make a list of the commits which are about to be rebased.
+Let the user edit that list before rebasing.
+This mode can also be used to split commits (see SPLITTING COMMITS below).
 
-The commit list format can be changed by setting the configuration option rebase.instructionFormat. A customized instruction format will automatically have the long commit hash prepended to the format.
+The commit list format can be changed by setting the configuration option rebase.instructionFormat.
+A customized instruction format will automatically have the long commit hash prepended to the format.
 
 See also INCOMPATIBLE OPTIONS below.
+```
 
 rebase될 커밋들의 리스트를 만든다. 사용자가 rebase하기 전에 리스트를 수정할 수 있게 해준다. 이 모드는 커밋을 쪼개는 데 사용할 수 있다.
 
-커밋 리스트 포맷은 configuration 옵션의 rebase.instructionFormat 설정에 따라 바뀔 수 있다. 커스터마이즈된 명령 포맷은 긴 커밋 해쉬가 포맷 앞에 자동으로 붙습니다.
+커밋 리스트 포맷은 configuration 옵션의 rebase.instructionFormat 설정에 따라 바뀔 수 있다. 커스터마이즈된 명령 포맷은 긴 커밋 해쉬가 포맷 앞에 자동으로 붙는다.
 
 **Summary : ** 커밋 리스트를 가져와 수정하여 rebase를 할 수 있다는 말이다.
 {: .notice--warning}
@@ -132,18 +137,20 @@ pick e2700a0 Refactor: Sort swift files by their function
   <img src="/assets/images/git/rebase-i.png" width="1000px">
 </p>
 
+
 당황하지 않고 위 설명에 나와있는대로 계속해서 rebase를 진행한다.
 
 ```
 git rebase --continue
 ```
 
-<br>
-
 continue를 하게되면 첫번째 커밋 메세지를 수정한 화면이 다시 나오게 되는데, 동일하게 메세지를 수정해주고 `:wq`를 사용하여 저장과 종료를 해주면 된다.
+
+이제 커밋 이력을 확인해보면 잘 바뀌어있는 것을 확인할 수 있다
+{: .notice--success}
 
 <br>
 
 #### References
 
-- https://git-scm.com/docs/git-rebase
+- [git-rebase](https://git-scm.com/docs/git-rebase)
