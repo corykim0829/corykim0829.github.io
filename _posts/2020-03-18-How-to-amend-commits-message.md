@@ -36,7 +36,6 @@ sitemap :
 
 ### git rebase -i
 
-```
 -i
 --interactive
 Make a list of the commits which are about to be rebased. Let the user edit that list before rebasing. This mode can also be used to split commits (see SPLITTING COMMITS below).
@@ -44,7 +43,6 @@ Make a list of the commits which are about to be rebased. Let the user edit that
 The commit list format can be changed by setting the configuration option rebase.instructionFormat. A customized instruction format will automatically have the long commit hash prepended to the format.
 
 See also INCOMPATIBLE OPTIONS below.
-```
 
 rebase될 커밋들의 리스트를 만든다. 사용자가 rebase하기 전에 리스트를 수정할 수 있게 해준다. 이 모드는 커밋을 쪼개는 데 사용할 수 있다.
 
@@ -131,7 +129,7 @@ pick e2700a0 Refactor: Sort swift files by their function
 첫번째 커밋 메세지를 수정하고 저장 후 종료하면 다음과 같은 화면이 나온다.
 
 <p align="left">
-  <img src="/assets/images/git/rebase-i.png" width="700px">
+  <img src="/assets/images/git/rebase-i.png" width="1000px">
 </p>
 
 당황하지 않고 위 설명에 나와있는대로 계속해서 rebase를 진행한다.
