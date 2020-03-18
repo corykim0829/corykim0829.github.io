@@ -6,10 +6,10 @@ header:
   overlay_filter: 0.2
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 categories:
-  - Development
-tags:
-  - Development
   - Git
+tags:
+  - commit guide
+  - git commit
 date: 2019-11-06 12:00:00
 lastmod: 2019-11-06 12:00:00
 sitemap :
