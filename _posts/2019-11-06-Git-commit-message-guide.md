@@ -1,5 +1,5 @@
 ---
-title: "[Git] commit msg guide 및 commit 방법"
+title: "[Git] Commit 메세지 작성 가이드"
 header:
   teaser: /assets/images/related-to-development.jpg
   overlay_image: /assets/images/related-to-development-h.jpeg
@@ -10,6 +10,9 @@ categories:
 tags:
   - commit guide
   - git commit
+  - commit with vim
+  - 깃 커밋 메세지
+  - 커밋 메세지
 date: 2019-11-06 12:00:00
 lastmod: 2019-11-06 12:00:00
 sitemap :
@@ -17,13 +20,15 @@ sitemap :
   priority : 1.0
 ---
 
-git commit message guide와 commit 방법
+좋은 커밋 메세지를 작성하기 위한 발걸음
 
+커밋 메세지를 작성하는 것에 어떤 기준이나 정답이 있는 것은 아니지만, 읽기 좋은 커밋을 작성하기 위해 가이드로 제안된 것들이 있다. **좋은 커밋 메세지**는 동료 개발자(혹은 미래의 동료)에게 의미를 전달하는 가장 좋은 의사소통 수단이다. 
 
+컴퓨터 사이언스 관련 온라인 코스를 제공하는 Udacity에서 괜찮은 커밋 메세지 가이드를 제안하고 있어 이를 번역해보았다. 이 가이드 포스트는 [이 포스트](https://chris.beams.io/posts/git-commit/)도 참고하여 만들어진 것 같다.
 
-## Udacity Git Commit Message Style Guide (해석)
+---
 
-Udacity에서 사용하는 git commit msg style이다.
+### Udacity Git Commit Message Style Guide
 
 > Introduction
 
@@ -33,9 +38,9 @@ Udacity에서 사용하는 git commit msg style이다.
 
 > Commit Messages
 
-#### 메세지 구조체: Message Structure
+#### 1. 메세지 구조체: Message Structure
 
-commit 메세지는 세개의 파트(:title, 선택적 body, 선택적 footer)로 빈줄에 의해 나뉘어져 있습니다. 구성은 다음과 같습니다 :
+commit 메세지는 개행에 의해 **세개의 파트**(:title, 선택적 body, 선택적 footer)로 나누어 집니다. 구성은 다음과 같습니다 :
 
 ```
 type: subject
@@ -47,40 +52,48 @@ footer
 
 타이틀은 메세지의 타입과 주제로 구성되어있습니다.
 
-#### 타입: the type
+<br>
+
+#### 2. 타입: the type
 
 타입은 타이틀과 함께 포함되는데 아래 타입들 중 하나가 될 수 있다:
 
-- feat: 새로운 기능
-- fix: 버그를 고침
-- docs: 문서를 수정
-- style: 포맷, 빠진 세미 콜론 등; 코드 변경 X
-- refactor: 제품 코드 리팩토링
-- test: 테스트 추가, 테스트 리팩토링; 제품 코드 변경 X
-- chore: 빌드 작업 업데이트, 패키지 매니저 config 등; 제품 코드 변경 X
+- Feat: 새로운 기능
+- Fix: 버그를 고침
+- Docs: 문서를 수정
+- Style: 포맷, 빠진 세미 콜론 등; 코드 변경 X
+- Refactor: 제품 코드 리팩토링
+- Test: 테스트 추가, 테스트 리팩토링; 제품 코드 변경 X
+- Chore: 빌드 작업 업데이트, 패키지 매니저 config 등; 제품 코드 변경 X
 
-chore는 이제까지 그냥 잡다한 작업을 처리하는 줄 알았는데, 다른 작업을 위한 type이었다.
+<br>
 
-#### 주제: the subject
+#### 3. 주제: the subject
 
-주제는 50자를 넘으면 안되며, 대문자로 시작하고 마침표로 끝내면 안됩니다.
+주제에 들어가는 문자열은 50자로 제한하며, 대문자로 시작하고 마침표로 끝내면 안됩니다.
 
-commit이 어떤 일을 하는지 서술하기 위해 어떤 것을 했다는 것 보다는 **명령적인 톤**을 사용합니다. 예를 들어, `chaged` 또는 `chages` 보다는 `change` 를 쓰는게 좋습니다.
+commit이 어떤 일을 하는지 서술하기 위해 어떤 것을 했다는 것 보다는 **명령적인 톤**을 사용합니다. 예를 들어, `Changed` 또는 `Changes` 보다는 `Change` 를 쓰는게 좋습니다. (Kor: `변경함`, `변경했음` 보다는 `변경`)
 
-#### The Body
+<br>
+
+#### 4. the Body
 
 모든 commit들이 body를 보증할 정도로 복잡하진 않으므로, body는 선택적이고 commit이 약간의 설명과 배경이 필요할 때에만 쓰인다. body는 commit이 무엇이고 왜 이 commit인지 설명하는데 쓰이지 어떻게 했는지를 스는 것이 아니다.
 
-body를 작성할 때, title과 body사이의 공백줄이 필수적이고 72글자를 넘을 수 없도록 길이의 제한이 있다.
+body를 작성할 때, title과 body사이의 **개행**이 필수적이고 72글자를 넘을 수 없도록 길이의 제한이 있다.
 
-#### The Footer
+<br>
+
+#### 5. the Footer
 
 footer는 선택적이며 issue tracker ID를 참조할 때 쓰인다.
 
-####  Example Commit Message
+<br>
+
+###  Example Commit Message
 
 ```
-feat: Summarize changes in around 50 characters or less
+Feat: Summarize changes in around 50 characters or less
 
 More detailed explanatory text, if necessary. Wrap it to about 72
 characters or so. In some contexts, the first line is treated as the
@@ -109,19 +122,19 @@ Resolves: #123
 See also: #456, #789
 ```
 
+<br>
 
+## How to commit with vim
 
-## How to commit
+여태까지 `git commit -m` 명령어를 사용하여서 간단하게 한줄로 요약하여 commit과 함께 메세지를 남겨왔다. terminal에서 **vim**을 사용하여 위에서 언급한 body와 footer도 커밋 메세지에 같이 쓸 수 있는 방법을 알아보자.
 
-여태까지 `git commit -m` 명령어를 사용하여서 간단하게 한줄로 요약하여 commit과 함께 메세지를 남겨왔다. 위에서 언급한 body와 footer도 같이 쓸 수 있는 방법을 찾아보았다.
-
-`git add` 명령어를 통해 변경사항이 stage에 올라와있는 상태에서 아래와 같이 commit 명령어에 별다른 옵션을 주지 않고 `Enter`를 치면 된다.
+별다른 editor를 따로 설정해주지 않았다면, default editor인 **vim**이 커밋 메세지를 작성하는데 사용된다. `git add` 명령어를 통해 변경사항이 stage에 올라와있는 상태에서 아래와 같이 커밋 명령어에 별다른 옵션을 주지 않고 `Enter`를 입력하면 vim editor로 이동하게 된다.
 
 ```
 $ git commit
 ```
 
-여기서 vim으로 전환된다. git의 commit message struct 수정 deafult editor는 vim으로 설정되었다. 하지만 설정을 하면 다른 editor로도 수정이 가능하다.
+엔터를 입력하면 vim으로 전환되며 vim은 기본적으로 일반모드로 실행이된다. 
 
 vim은 에디터 중 하나로, 대표적인 모드는 다음과 같다.
 
@@ -132,13 +145,13 @@ vim은 에디터 중 하나로, 대표적인 모드는 다음과 같다.
 
 <br>
 
-처음에 vim에 들어가게 되면 일반 모드로 들어가지는데, 여기서 입력을 하기위해 i를 입력한다. 그러면 경로에서 아래와 같은 메세지가 가장 하단에 출력된다.
+처음에 vim에 들어가게 되면 **일반 모드**로 들어가지는데, 여기서 입력을 하기위해서는 **입력 모드**로 들어가야하기 때문에 i를 입력한다. 그러면 경로에서 아래와 같은 메세지가 가장 하단에 출력된다.
 
 ```
 -- INSERT --
 ```
 
-여기서 이제 위에서 나온 가이드라인에 맞게 title, body, footer를 공백 line으로 구분하여 작성을 하면 된다.
+여기서 이제 위에서 나온 가이드라인에 맞게 subject, body, footer를 개행으로 구분하여 작성을 하면 된다.
 
 <br>
 
@@ -149,18 +162,22 @@ vim은 에디터 중 하나로, 대표적인 모드는 다음과 같다.
 
 <br>
 
+### logs in Github
+
 정상적으로 저장하고 종료가 되었다면 commit을 push할 수 있게된다. push를 하면 github 에는 다음과 같이 log가 남는다.
 
 <p align="left">
   <img src="/assets/images/2019-11-06-git-1.png" width="640px">
 </p>
 
+
 body와 footer가 추가되면 기존 커밋 log에서 더보기 버튼을 누르면 확인할 수 있다.
 
-
+<br>
 
 ### References
 
 - [Udacity Git Commit Message Style Guide](https://udacity.github.io/git-styleguide/)
+- [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
 - [Git의 기초 - 수정하고 저장소에 저장하기](https://git-scm.com/book/ko/v1/Git의-기초-수정하고-저장소에-저장하기)
 - [vim기초](https://nolboo.kim/blog/2016/11/15/vim-for-beginner/)
