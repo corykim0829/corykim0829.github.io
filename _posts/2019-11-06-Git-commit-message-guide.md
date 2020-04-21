@@ -58,13 +58,13 @@ footer
 
 타입은 타이틀과 함께 포함되는데 아래 타입들 중 하나가 될 수 있다:
 
-- Feat: 새로운 기능
-- Fix: 버그를 고침
-- Docs: 문서를 수정
-- Style: 포맷, 빠진 세미 콜론 등; 코드 변경 X
-- Refactor: 제품 코드 리팩토링
-- Test: 테스트 추가, 테스트 리팩토링; 제품 코드 변경 X
-- Chore: 빌드 작업 업데이트, 패키지 매니저 config 등; 제품 코드 변경 X
+- feat: 새로운 기능
+- fix: 버그를 고침
+- docs: 문서를 수정
+- style: 포맷, 빠진 세미 콜론 등; 코드 변경 X
+- refactor: 제품 코드 리팩토링
+- test: 테스트 추가, 테스트 리팩토링; 제품 코드 변경 X
+- chore: 빌드 작업 업데이트, 패키지 매니저 config 등; 제품 코드 변경 X
 
 <br>
 
@@ -93,7 +93,7 @@ footer는 선택적이며 issue tracker ID를 참조할 때 쓰인다.
 ###  Example Commit Message
 
 ```
-Feat: Summarize changes in around 50 characters or less
+feat: Summarize changes in around 50 characters or less
 
 More detailed explanatory text, if necessary. Wrap it to about 72
 characters or so. In some contexts, the first line is treated as the
