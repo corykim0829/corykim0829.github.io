@@ -194,7 +194,7 @@
 
   .archive__item-title {
     margin-top: 0.5em;
-    font-size: $type-size-5;
+    font-size: $title-size;
   }
 
   .archive__item-excerpt {
@@ -409,7 +409,7 @@
   .feature__wrapper {
     .archive__item-title {
       margin-top: 0.25em;
-      font-size: 1em;
+      font-size: 0.9em; // default : 1em
     }
   }
 
