@@ -53,7 +53,7 @@ rebase될 커밋들의 리스트를 만듭니다. 사용자가 rebase하기 전�
 
 커밋 리스트 포맷은 configuration 옵션의 rebase.instructionFormat 설정에 따라 바뀔 수 있습니다. 커스터마이즈된 명령 포맷은 긴 커밋 해쉬가 포맷 앞에 자동으로 붙습니다.
 
-**요약 : ** 커밋 리스트를 가져와 수정하여 rebase를 할 수 있다는 말입니다.
+요약 : 커밋 리스트를 가져와 수정하여 rebase를 할 수 있습니다.
 {: .notice--warning}
 
 <br>
