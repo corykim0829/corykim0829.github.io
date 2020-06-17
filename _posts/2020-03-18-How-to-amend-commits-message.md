@@ -110,7 +110,7 @@ pick e2700a0 Refactor: Sort swift files by their function
 그럼 먼저 **첫번째 커밋 메세지**를 수정할 수 있도록 vi editor가 나오게 됩니다. 마찬가지로 vi editor이며 수정하여 원하는 메세지로 수정합니다.
 메세지를 수정했다면 마찬가지로 `:wq`를 사용하여 저장 후 종료합니다.
 
-```s
+```
 [#7] Feat: DoodleDataManager - fetching & decoding JSON
 
 % Please enter the commit message for your changes. Lines starting
