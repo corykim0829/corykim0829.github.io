@@ -34,6 +34,7 @@ UICollectionViewCell 동적 높이 구하기
   <img src="/assets/images/collectionview-cell-dynamic-height/final.gif" width="320px">
 </p>
 
+
 Github처럼 이슈를 관리하는 서비스를 개발했습니다. 이슈에 레이블을 붙일 수 있으며 이슈에 레이블이 많아져 레이블이 차지하는 공간이 많아지면 이에 따라 동적으로 셀 높이를 결정하도록 구현하였습니다.
 
 <br>
@@ -43,8 +44,9 @@ Github처럼 이슈를 관리하는 서비스를 개발했습니다. 이슈에 �
 `IssueCell`은 `IssuesCollectionView`의 셀로 등록되어있으며 구성은 아래와 같습니다.
 
 <p align="center">
-  <img src="/assets/images/collectionview-cell-dynamic-height/layout.png" width="380px">
+  <img src="/assets/images/collectionview-cell-dynamic-height/layout.png" width="520px">
 </p>
+
 
 #### ContentsStackView
 
@@ -61,8 +63,9 @@ Github처럼 이슈를 관리하는 서비스를 개발했습니다. 이슈에 �
 #### Layout
 
 <p align="center">
-  <img src="/assets/images/collectionview-cell-dynamic-height/layout-hierarchy.png" width="400px">
+  <img src="/assets/images/collectionview-cell-dynamic-height/layout-hierarchy.png" width="440px">
 </p>
+
 
 이후에 더 자세하게 설명드리겠지만, 동적 높이를 조금 더 편하게 구현하기 위해서 코드와 Layout을 모두 UI를 구현하였습니다. `ContentsStackView`가 `IssueCell` 내부 layout 에 영향을 가장 많이 주기 때문에 `IssueCell`에 오토레이아웃을 주었습니다.
 
@@ -115,7 +118,7 @@ func collectionView(
 이제 실제 cell보다 넉넉하게 만들어진 dummy cell에 실제 데이터를 넣어줘야합니다. 현재 `IssuesCollectionView`의 상위 객체인 `IssuesViewController`는 아래 그림과 같은 구조로 구성되어있습니다. `IssuesCollectionViewDataSource`는 분리된 클래스로 뷰모델 역할을 하여 서버로부터 이슈 정보를 가져오면 `IssuesCollectionView`를 reload 하도록 바인딩되어있습니다. 
 
 <p align="center">
-  <img src="/assets/images/collectionview-cell-dynamic-height/vc-datasource.png" width="620px">
+  <img src="/assets/images/collectionview-cell-dynamic-height/vc-datasource.png" width="720px">
 </p>
 
 이슈 데이터는 모두 **dataSource**가 가지고 있기 때문에 dataSource에 있는 실제 데이터를 가져오기 위해서 `referIssue(at:handler:)` 메소드를 사용합니다. handler라는 클로저 매개변수를 사용하여 dataSource의 특정 indexPath의 이슈 데이터를 사용할 수 있습니다.
