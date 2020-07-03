@@ -139,11 +139,11 @@ func referIssue(at indexPath: IndexPath, handler: (Issue) -> Void) {
 
 #### 내부 IssueLabelsCollectionView height 잡기
 
-Dummy cell을 실제 데이터로 업데이트 해줄 때에 가장 중요한 부분은 역시나 동적으로 변하는 컨텐츠입니다.
+Dummy cell을 실제 데이터로 업데이트 해줄 때에 가장 중요한 부분은 역시나 **동적으로 변하는 컨텐츠**입니다.
 
-`IssueCell`에는 `IssueLabelsViewController`가 있어 이 뷰컨트롤러의 `IssueLabelsCollectionView`를 업데이트하여 높이가 동적으로 변하는지 확인해야합니다.
+`IssueCell`에는 `IssueLabelsViewController`가 있어 이 뷰컨트롤러의 하위 객체인 `IssueLabelsCollectionView`를 이슈 데이터를 기반으로 업데이트하여 **정확한 높이**를 알아야합니다.
 
-따라서 `IssueCell` 의 `configureCell(with:)`에서 아래와 같이 두개의 메소드 호출을 통해 라벨 정보를 전달해주고 `IssueLabelsCollectionView`를 `reload` 해줍니다.
+따라서 `IssueCell` 의 `configureCell(with:)`에서 아래와 같이 두개의 메소드 호출을 통해 이슈 데이터의 레이블 정보를 전달해주고 `IssueLabelsCollectionView`를 `reload` 해줍니다.
 
 ```swift
 issueLabelsViewController.updateLabels(issue.labels)
@@ -169,7 +169,7 @@ issueLabelsHeightConstraint = issueLabelsViewController.view.heightAnchor.constr
 issueLabelsHeightConstraint.isActive = true
 ```
 
-`issueLabelsViewController.contentHeight`는 computed property로 IssueLabelsCollectionView의 contentSize.height를 반환합니다.
+`issueLabelsViewController.contentHeight`는 computed property로 `IssueLabelsCollectionView`의 contentSize.height를 반환합니다.
 {: .notice--warning}
 
 `issueLabelsHeightConstraint`라는 변수로 따로 프로퍼티로 사용하는 이유는 IssueCell이 재사용될 때 heightAnchor constraint를 중복으로 지정해주기 때문에 이를 방지하기 위해 사용하였습니다.
@@ -177,7 +177,7 @@ issueLabelsHeightConstraint.isActive = true
 
 <br>
 
-위와 같은 작업은 이슈 데이터의 라벨이 있을 때에만 적용되어야 합니다. 전체 코드를 보면 아래와 같습니다.
+위와 같은 작업은 이슈 데이터의 레이블이 있을 때에만 적용되어야 합니다. 이슈의 레이블 뷰컨트롤러의 사이즈를 결정하는 전체 코드를 보면 아래와 같습니다.
 
 ```swift
 private func configureIssueLabels(with issue: Issue) {
@@ -196,11 +196,11 @@ private func configureIssueLabels(with issue: Issue) {
 
 #### EstimatedSize 만들기
 
-이제 dummyCell의 내부 컨텐츠의 사이즈의 정확한 값도 정해졌기 때문에 cell의 사이즈를 결정해야합니다.
+이제 dummyCell의 내부 컨텐츠의 사이즈의 정확한 값도 정해졌기 때문에 실제로 반환할 **cell의 사이즈**를 결정해야합니다.
 
-실제 이슈 데이터를 통해 업데이트된 dummy cell을 `layoutIfNeeded()`와 `systemLayoutSizeFitting(_:)` 메소드를 사용하여 예상 사이즈를 잡아줍니다.
+실제 이슈 데이터를 통해 업데이트된 dummy cell을 `layoutIfNeeded()`와 `systemLayoutSizeFitting(_:)` 메소드를 사용하여 **예상 사이즈**를 잡아줍니다.
 
-`systemLayoutSizeFitting(_:)`는 view의 현재 constraints를 기반으로 최적의 사이즈를 반환하는 메소드입니다.
+`systemLayoutSizeFitting(_:)`는 view의 현재 constraints를 기반으로 최적의 사이즈를 반환하는 메소드입니다. 그렇기 때문에 넉넉하게 생성되었던 dummy cell을 현재 constraints에 가장 딱 맞는 사이즈로 반환해줍니다. 파라미터에는 뷰에 희망하는 사이즈를 넣게 되어있습니다. 처음 dummy cell을 만들 때 설정해주었던 사이즈를 사용하면 됩니다. 반환된 CGSize값은 `estimatedSize` 지역변수로 저장합니다.
 
 ```swift
 dummyCell.layoutIfNeeded()
@@ -236,7 +236,7 @@ func collectionView(
 
 ### 마치며
 
-이번 글에서는 UICollectionView가 동적으로 높이가 변할 때, 그리고 UICollectionViewCell의 높이를 동적으로 설정하는 방법에 대해 설명했습니다.
+이번 글에서는 UICollectionViewCell의 동적 높이를 구현해보았습니다. 쉽지 않았던 만큼 더 보람이 있었던 것 같습니다. iOS 개발에서 많이 사용되는 collectionView인 만큼 자주 쓸 것 같습니다. 사실 label cell도 텍스트 길이에 따라 동적으로 width가 변동되는데, 이는 너무 길어질 것 같아서 넣지 않았습니다. 추후에 시간이 되면 추가 작성하여 링크를 걸 예정입니다. 피드백은 언제나 환영합니다! 감사합니다.
 
 <br>
 
