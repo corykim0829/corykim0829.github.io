@@ -18,7 +18,7 @@ sitemap :
   priority : 1.0
 ---
 
-UICollectionViewCell 동적 높이 구하기
+동적 컨텐츠를 가진 UICollectionViewCell 동적 높이를 구현해보았습니다.
 
 <br>
 
