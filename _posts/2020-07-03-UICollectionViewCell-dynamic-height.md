@@ -118,8 +118,9 @@ func collectionView(
 이제 실제 cell보다 넉넉하게 만들어진 dummy cell에 실제 데이터를 넣어줘야합니다. 현재 `IssuesCollectionView`의 상위 객체인 `IssuesViewController`는 아래 그림과 같은 구조로 구성되어있습니다. `IssuesCollectionViewDataSource`는 분리된 클래스로 뷰모델 역할을 하여 서버로부터 이슈 정보를 가져오면 `IssuesCollectionView`를 reload 하도록 바인딩되어있습니다. 
 
 <p align="center">
-  <img src="/assets/images/collectionview-cell-dynamic-height/vc-datasource.png" width="720px">
+  <img src="/assets/images/collectionview-cell-dynamic-height/vc-datasource.png" width="800px">
 </p>
+
 
 이슈 데이터는 모두 **dataSource**가 가지고 있기 때문에 dataSource에 있는 실제 데이터를 가져오기 위해서 `referIssue(at:handler:)` 메소드를 사용합니다. handler라는 클로저 매개변수를 사용하여 dataSource의 특정 indexPath의 이슈 데이터를 사용할 수 있습니다.
 
