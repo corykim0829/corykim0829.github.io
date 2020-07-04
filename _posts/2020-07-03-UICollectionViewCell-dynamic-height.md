@@ -45,7 +45,7 @@ Github처럼 이슈에 **레이블**을 붙일 수 있는 기능이 있으며, �
 `IssueCell`은 `IssuesCollectionView`의 셀로 등록되어있으며 구성은 아래와 같습니다.
 
 <p align="center">
-  <img src="/assets/images/collectionview-cell-dynamic-height/layout.png" width="600px">
+  <img src="https://github.com/corykim0829/corykim0829.github.io/blob/master/assets/images/collectionview-cell-dynamic-height/layout.png?raw=true" width="740px">
 </p>
 
 
