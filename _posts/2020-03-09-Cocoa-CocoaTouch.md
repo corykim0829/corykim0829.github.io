@@ -17,7 +17,7 @@ sitemap :
   priority : 1.0
 ---
 
-Apple의 Cocoa 그리고 Cocoa Touch에 대해서 알아보자
+Apple의 Cocoa 그리고 Cocoa Touch에 대해서 알아보자.
 
 <br>
 
