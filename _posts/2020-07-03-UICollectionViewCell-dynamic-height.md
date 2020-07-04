@@ -45,7 +45,7 @@ Github처럼 이슈에 **레이블**을 붙일 수 있는 기능이 있으며, �
 `IssueCell`은 `IssuesCollectionView`의 셀로 등록되어있으며 구성은 아래와 같습니다.
 
 <p align="center">
-  <img src="https://github.com/corykim0829/corykim0829.github.io/blob/master/assets/images/collectionview-cell-dynamic-height/layout.png?raw=true" width="740px">
+  <img src="https://github.com/corykim0829/corykim0829.github.io/blob/master/assets/images/collectionview-cell-dynamic-height/whole-layout.png?raw=true" width="740px">
 </p>
 
 
@@ -133,7 +133,7 @@ func referIssue(at indexPath: IndexPath, handler: (Issue) -> Void) {
 DataSource를 통해 데이터를 사용하는 구조는 다음과 같습니다.
 
 <p align="center">
-  <img src="/assets/images/collectionview-cell-dynamic-height/vc-datasource.png" width="800px">
+  <img src="/assets/images/collectionview-cell-dynamic-height/vc-datasource-structure.png" width="800px">
 </p>
 
 가져온 이슈 데이터로 dummy cell을 구성해주기 위해 `IssueCell`의 `configureCell(with:)` 메소드를 호출합니다. 실제 정보를 기반으로 셀을 구성해주는 메소드입니다. `ContentsStackView`에 있는 Title, Writer를 업데이트하고, 가장 중요한 **레이블**들을 업데이트해주는 작업들을 실행하게 됩니다.
@@ -142,7 +142,7 @@ DataSource를 통해 데이터를 사용하는 구조는 다음과 같습니다.
 
 #### 내부 IssueLabelsCollectionView height 잡기
 
-Dummy cell을 실제 데이터로 업데이트 해줄 때에 가장 중요한 부분은 **유동적으로 변하는 개수를 가진 레이블들을 담는 `IssueLabelsCollectionView`**입니다. 레이블을 몇개를 가지고 있느냐에 따라서 높이가 변경되기 때문입니다.
+Dummy cell을 실제 데이터로 업데이트 해줄 때에 가장 중요한 부분은 **유동적으로 변하는 개수를 가진 레이블들을 담는 **`IssueLabelsCollectionView`입니다. 레이블을 몇개를 가지고 있느냐에 따라서 높이가 변경되기 때문입니다.
 
 `IssueLabelsCollectionView`는 `IssueLabelsViewController`의 하위 객체로 전달받은 이슈 데이터를 기반으로 업데이트하여 **정확한 높이**를 결정해야합니다.
 
