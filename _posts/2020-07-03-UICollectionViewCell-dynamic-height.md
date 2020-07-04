@@ -32,7 +32,7 @@ Github 모바일앱과 같은 이슈 관리 앱 개발 프로젝트를 진행하
 ### 구현 화면
 
 <p align="center">
-  <img src="/assets/images/collectionview-cell-dynamic-height/final.gif" width="320px">
+  <img src="/assets/images/collectionview-cell-dynamic-height/final2.gif" width="320px">
 </p>
 
 
