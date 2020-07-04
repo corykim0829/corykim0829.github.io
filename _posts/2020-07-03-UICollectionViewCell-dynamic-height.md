@@ -19,7 +19,7 @@ sitemap :
   priority : 1.0
 ---
 
-Dummy cell을 이용하여 높이 계산하기
+Dummy cell을 이용하여, UICollectionViewCell의 동적 높이를 계산해보았습니다.
 
 <br>
 
