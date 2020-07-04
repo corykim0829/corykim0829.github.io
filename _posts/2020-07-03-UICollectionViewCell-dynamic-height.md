@@ -1,5 +1,5 @@
 ---
-title: "[iOS] UICollectionViewCell Dynamic Height, 동적 높이 구하기"
+title: "[iOS] UICollectionViewCell Dynamic Height, 동적 높이 구현하기 with Dummy Cell"
 header:
   teaser: /assets/images/ios-posts2.jpeg
   overlay_image: /assets/images/ios-posts2.jpeg
