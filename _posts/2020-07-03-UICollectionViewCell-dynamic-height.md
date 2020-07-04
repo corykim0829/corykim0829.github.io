@@ -251,6 +251,7 @@ func collectionView(
 
 - Mason
 - Jinie
+- Delma
 
 <br>
 
