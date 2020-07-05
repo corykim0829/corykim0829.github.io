@@ -99,17 +99,15 @@ Swift의 `Notification`과 동일합니다.
 
 즉, 위에서 언급한 것과 같이 `Notification`과 `NSNotification`은 연결다리가 있기 때문에 서로 캐스팅될 수 있다는 뜻입니다. 하지만 언제든지 원한다면 `NSNotification`을 직접적으로 사용할 수도 있습니다.
 
-<p> <b>Important</b><br>
-Swift의 Foundation 프레임워크로 <b>overlay</b>는 `Notification` 구조체를 제공하며, 이 구조체는 `NSNotification` class로 `bridging` 되어있습니다.
-</p>
-
+**Important** <br>
+Swift의 Foundation 프레임워크로 **overlay**는 `Notification` 구조체를 제공하며, 이 구조체는 `NSNotification` class로 `bridging` 되어있습니다.
 {: .notice--warning}
 
 ---
 
 <br>
 
-공식문서에는 이렇게 간단하게 정의가 되어있지만, Xcode에서 구체적으로 어떻게 구현되어있는지 살펴볼 수 있다. `Notification` struct는 다음과 같은 구조를 가지고 있다.
+공식문서에는 이렇게 간단하게 정의가 되어있지만, Xcode에서 구체적으로 어떻게 구현되어있는지 살펴볼 수 있다. `Notification` struct는 다음과 같은 구조를 가지고 있습니다.
 
 ```swift
 public struct Notification : ReferenceConvertible, Equatable, Hashable {
@@ -130,7 +128,7 @@ public struct Notification : ReferenceConvertible, Equatable, Hashable {
 }
 ```
 
-중요하게 봐야할 것은 상단에 선언된 2개의 `typealias`와 `name` 프로퍼티이다. 먼저 `Name`을 보면 `typealias`를 사용하여 `NSNotification.Name`이라는 타입의 별칭으로 `Notification` 구조체 내에서 `Name`이라는 별칭을 사용하겠다고 선언하였고, 구조체에서 해당 타입 값을 저장할 수 있도록 `name` 프로퍼티를 따로 선언하였다.
+중요하게 봐야할 것은 상단에 선언된 2개의 `typealias`와 `name` 프로퍼티입니다. 먼저 `Name`을 보면 `typealias`를 사용하여 `NSNotification.Name`이라는 타입의 별칭으로 `Notification` 구조체 내에서 `Name`이라는 별칭을 사용하겠다고 선언하였고, 구조체에서 해당 타입 값을 저장할 수 있도록 `name` 프로퍼티를 따로 선언하였다.
 
 마찬가지로 `typealias`를 사용하여 `ReferenceType`이라는 별칭을 `NSNotification` 타입을 대신해 사용하겠다고 선언하였다. 하지만 여기서 사용되는 `ReferenceType`은 [Associated Type](https://corykim0829.github.io/swift/Associated-Type/)이기 때문에 `ReferenceConvertible` 프로토콜에서 `ReferenceType`의 타입을 결정한다.
 
