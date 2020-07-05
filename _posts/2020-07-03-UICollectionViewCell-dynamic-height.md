@@ -142,7 +142,7 @@ DataSource를 통해 데이터를 사용하는 구조는 다음과 같습니다.
 
 #### 내부 IssueLabelsCollectionView height 잡기
 
-Dummy cell을 실제 데이터로 업데이트 해줄 때에 가장 중요한 부분은 **유동적으로 변하는 개수를 가진 레이블들을 담는 **`IssueLabelsCollectionView`입니다. 레이블을 몇개를 가지고 있느냐에 따라서 높이가 변경되기 때문입니다.
+Dummy cell을 실제 데이터로 업데이트 해줄 때에 가장 중요한 부분은 **유동적으로 변하는 개수를 가진 레이블들을 담는** `IssueLabelsCollectionView`입니다. 레이블을 몇개를 가지고 있느냐에 따라서 높이가 변경되기 때문입니다.
 
 `IssueLabelsCollectionView`는 `IssueLabelsViewController`의 하위 객체로 전달받은 이슈 데이터를 기반으로 업데이트하여 **정확한 높이**를 결정해야합니다.
 
@@ -252,6 +252,7 @@ func collectionView(
 - Mason
 - Jinie
 - Delma
+- Gangwoon
 
 <br>
 
