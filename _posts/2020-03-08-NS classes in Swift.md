@@ -128,18 +128,18 @@ public struct Notification : ReferenceConvertible, Equatable, Hashable {
 }
 ```
 
-중요하게 봐야할 것은 상단에 선언된 2개의 `typealias`와 `name` 프로퍼티입니다. 먼저 `Name`을 보면 `typealias`를 사용하여 `NSNotification.Name`이라는 타입의 별칭으로 `Notification` 구조체 내에서 `Name`이라는 별칭을 사용하겠다고 선언하였고, 구조체에서 해당 타입 값을 저장할 수 있도록 `name` 프로퍼티를 따로 선언하였다.
+중요하게 봐야할 것은 상단에 선언된 2개의 `typealias`와 `name` 프로퍼티입니다. 먼저 `Name`을 보면 `typealias`를 사용하여 `NSNotification.Name`이라는 타입의 별칭으로 `Notification` 구조체 내에서 `Name`이라는 별칭을 사용하겠다고 선언하였고, 구조체에서 해당 타입 값을 저장할 수 있도록 `name` 프로퍼티를 따로 선언하였습니다.
 
-마찬가지로 `typealias`를 사용하여 `ReferenceType`이라는 별칭을 `NSNotification` 타입을 대신해 사용하겠다고 선언하였다. 하지만 여기서 사용되는 `ReferenceType`은 [Associated Type](https://corykim0829.github.io/swift/Associated-Type/)이기 때문에 `ReferenceConvertible` 프로토콜에서 `ReferenceType`의 타입을 결정한다.
+마찬가지로 `typealias`를 사용하여 `ReferenceType`이라는 별칭을 `NSNotification` 타입을 대신해 사용하겠다고 선언하였습니다. 하지만 여기서 사용되는 `ReferenceType`은 [Associated Type](https://corykim0829.github.io/swift/Associated-Type/)이기 때문에 `ReferenceConvertible` 프로토콜에서 `ReferenceType`의 타입을 결정합니다.
 
 <br>
 
 ## ReferenceConvertible
 
 A decoration applied to types that are backed by a Foundation reference type.
-Foundation 참조 타입이 지원하는 타입에 적용되는 decoration이다.
+Foundation 참조 타입이 지원하는 타입에 적용되는 decoration입니다.
 
-여기서 사용되는 `ReferenceCovertible` protocol은 [Associated Type](https://corykim0829.github.io/swift/Associated-Type/)을 사용하는 프로토콜이다.
+여기서 사용되는 `ReferenceCovertible` protocol은 [Associated Type](https://corykim0829.github.io/swift/Associated-Type/)을 사용하는 프로토콜입니다.
 
 ```swift
 public protocol ReferenceConvertible : CustomDebugStringConvertible, CustomStringConvertible, Hashable, _ObjectiveCBridgeable {
@@ -147,7 +147,7 @@ public protocol ReferenceConvertible : CustomDebugStringConvertible, CustomStrin
 }
 ```
 
-NS가 붙은 클래스들을 Swift의 구조체로 연결다리를 형성하기 위해서는 구체적으로 `ReferenceConvertible`이라는 프로토콜을 사용하여 구현한다. 이 프로토콜은 다른 NS classes를 기반으로 만들어진 Swift structures에서도 확인할 수 있다.
+NS가 붙은 클래스들을 Swift의 구조체로 연결다리를 형성하기 위해서는 구체적으로 `ReferenceConvertible`이라는 프로토콜을 사용하여 구현하였습니다. 이 프로토콜은 다른 NS classes를 기반으로 만들어진 Swift structures에서도 확인할 수 있습니다.
 
 <br>
 
