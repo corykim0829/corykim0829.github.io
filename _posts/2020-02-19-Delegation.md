@@ -59,10 +59,10 @@ Data source는 delegate와 거의 동일하다고 볼 수 있습니다. 차이�
 
 ### UIImagePickerControllerDelegate
 
-자주 사용되는 delegation을 예시를 들어보겠습니다. `SecondViewController`를 통해 `UIImagePickerController`를 present하여 사용하려는 예제입니다.
+자주 사용되는 delegation을 예시를 들어보겠습니다. `FirstViewController`를 통해 `UIImagePickerController`를 present하여 사용하려는 예제입니다.
 
 ```swift
-class SecondViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FirstViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let imagePickerController = UIImagePickerController()
     
