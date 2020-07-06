@@ -139,7 +139,7 @@ public struct Notification : ReferenceConvertible, Equatable, Hashable {
 A decoration applied to types that are backed by a Foundation reference type.
 Foundation 참조 타입이 지원하는 타입에 적용되는 decoration입니다.
 
-여기서 사용되는 `ReferenceCovertible` protocol은 [Associated Type](https://corykim0829.github.io/swift/Associated-Type/)을 사용하는 프로토콜입니다.
+여기서 사용되는 `ReferenceCovertible` protocol은 [associated type](https://corykim0829.github.io/swift/Associated-Type/)을 사용하는 프로토콜입니다.
 
 ```swift
 public protocol ReferenceConvertible : CustomDebugStringConvertible, CustomStringConvertible, Hashable, _ObjectiveCBridgeable {
