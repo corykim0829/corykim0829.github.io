@@ -29,20 +29,22 @@ Cocoa와 Cocoa Touch의 간단한 설명을 참고하시면 내용을 이해하�
 
 <br>
 
-`NSNotification`과 `Notification`의 연관 관계를 찾던 중, Apple developer 문서에서는 다음과 같은 문서가 있었습니다.
+Apple developer 공식 문서에서는 다음과 같이 언급되어있습니다.
 
 ### Classes Bridged to Swift Standard Library Value Types
+
+**Swift 표준 라이브러리 값타입에 브리지된 클래스**
 
 Use bridged reference types when you need reference semantics or Foundation-specific behavior.
 Reference semantics 또는 Foundation 특정 행동이 필요하면 연결된 참조 타입을 사용하시오.
 
-이 부분에 대해서 명확한 이해가 가지 않았는데, 아래 `iOS 13 Programming Fundamentals with Swift: Swift, Xcode, and Cocoa Basics` 책의 **Some Foundation Classes** 일부분입니다.
-
-글을 보면 두 객체간 연결다리를 짓는 행위인 **"Bridging"**에 대해서 조금 더 이해가 될 것입니다.
-
 <br>
 
-## Foundation Classes
+공식 문서에서 언급된 부분으로는 이해가 되지 않아서 조금 더 구글링을 해보았습니다.
+
+다음은 `iOS 13 Programming Fundamentals with Swift: Swift, Xcode, and Cocoa Basics` 책의 **Some Foundation Classes** 일부분입니다.
+
+## Some Foundation Classes
 
 Cocoa의 Foundation 클래스는 기본 데이터 타입과 Cocoa와 의사소통의 기반을 형성해줄 유틸리티를 제공합니다. 더 많은 정보는 Apple의 Foundation framework documentation 페이지에서 Foundation 클래스 리스트를 참고하면 좋습니다.
 
@@ -153,6 +155,7 @@ NS가 붙은 클래스들을 Swift의 구조체로 연결다리를 형성하기 
 
 #### Reference
 
+- [Classes Bridged to Swift Standard Library Value Types](https://developer.apple.com/documentation/foundation/object_runtime/classes_bridged_to_swift_standard_library_value_types)
 - iOS 13 Programming Fundamentals with Swift: Swift, Xcode, and Cocoa Basics
 - [NSNotification](https://developer.apple.com/documentation/foundation/nsnotification)
 - [Notification](https://developer.apple.com/documentation/foundation/notification)
