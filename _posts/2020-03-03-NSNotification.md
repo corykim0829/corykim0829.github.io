@@ -46,7 +46,7 @@ Notification을 사용하기 위해서는 먼저 객체를 notification의 obser
 
 ## The Notification Object
 
-Notification 메커니즘에서 오브젝트 사이에서 보내지는 **notification**은 **객체**로, `NSNotification`의 인스턴스입니다. 이 객체에는 이벤트의 정보가 캡슐화되어있는데, 예를 들면 윈도우를 선택하는 이벤트 또는 네트워크 연결이 닫힐 때의 이벤트가 있습니다. 이벤트가 발생되면, 해당 이벤트를 처리하는 오브젝트는 **notification center**에 **notification**을 발송합니다. 그리고 notification center는 즉시 **등록된 모든 객체**에게 notification을 발송합니다. 등록된 객체는 observer로 notification을 관찰하고 있는 객체들입니다.
+Notification 메커니즘에서 객체 사이에서 보내지는 **notification**은 **객체**로, `NSNotification`의 인스턴스입니다. 이 객체에는 이벤트의 정보가 캡슐화되어있는데, 예를 들면 윈도우를 선택하는 이벤트 또는 네트워크 연결이 닫힐 때의 이벤트가 있습니다. 이벤트가 발생되면, 해당 이벤트를 처리하는 객체는 **notification center**에 **notification**을 발송합니다. 그리고 notification center는 즉시 **등록된 모든 객체**에게 notification을 발송합니다. 등록된 객체는 observer로 notification을 관찰하고 있는 객체들입니다.
 
 `NSNotification` 객체에는 `name`, `object` 그리고 `userInfo`를 포함하고 있습니다. `name`은 `Notification` 객체를 식별하는 태그입니다. Notification은 `name`으로 식별되기 때문에 고유 `name`을 지정해줘야합니다. `object`는 notification 발송할 때, 해당 notification의 observer에게 보내고 싶은 어떤 `object`든지 가능합니다. 보통 notification을 발송한 객체를 사용하며, nil값을 넣으면 사용하지 않는다는 의미입니다. `userInfo`는 Dictionary 타입으로 이벤트와 관련된 정보를 저장합니다.
 
@@ -61,7 +61,7 @@ class NSNotification : NSObject
 ```
 
 - `var name: NSNotification.Name` - Notification 식별 태그
-- `var object: Any?` - Notification 관련 오브젝트
+- `var object: Any?` - Notification 관련 객체
 - `var userInfo: [AnyHashable: Any]?` - Notification 관련 정보를 담은 dictionary
 
 <br>
