@@ -49,7 +49,7 @@ sitemap :
 스크롤 뷰를 추가하기 전, 뷰컨트롤러의 뷰와 스크롤뷰를 구분하기 위해 뷰컨트롤러의 뷰의 background color를 주황색으로 변경하였습니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/1.png" width="320px">
+  <img src="/assets/images/scrollview/1.png" width="300px">
 </p>
 
 <br>
@@ -59,7 +59,7 @@ sitemap :
 위와 같이 constraint를 잡아주면, 자동으로 스크롤 뷰의 **frame layout guide**가 스크롤 뷰의 super view에 constraint가 잡혀집니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/2.png" width="400px">
+  <img src="/assets/images/scrollview/2.png" width="520px">
 </p>
 
 <br>
@@ -67,7 +67,7 @@ sitemap :
 스크롤 뷰의 leading, top, trailing, bottom constraint를 다 줬는데도 다음과 같이 경고가 뜨게 됩니다. 그 이유는 바로 스크롤 뷰의 content의 사이즈가 정해져 있지 않기 때문에 발생하는 경고입니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/3.png" width="400px">
+  <img src="/assets/images/scrollview/3.png" width="540px">
 </p>
 
 <br>
@@ -75,7 +75,7 @@ sitemap :
 스크롤 뷰에서 가장 중요한 것은 content의 사이즈인 **width와 height**가 정해져 있어야한다는 것입니다. 그러기 위해서 content를 담을 `contentView`라는 이름을 가진 `UIView`를 하나 만들어서 스크롤 뷰에 추가할 것입니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/4.png" width="400px">
+  <img src="/assets/images/scrollview/4.png" width="540px">
 </p>
 
 <br>
@@ -83,7 +83,7 @@ sitemap :
 추가된 `contentView`는 스크롤 뷰의 `Content Layout Guide`에 leading, top, trailing, bottom anchor를 constant 0으로 잡아줍니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/5-1.png" width="320px"> <img src="/assets/images/scrollview/5-2.png" width="320px">
+  <img src="/assets/images/scrollview/5-1.png" width="400px"> <img src="/assets/images/scrollview/5-2.png" width="400px">
 </p>
 
 이렇게 Constraint를 잡아줘도 `contentView`의 실질적인 width와 height가 명확하게 없기 때문에 경고가 뜨게 됩니다. 
@@ -97,7 +97,7 @@ sitemap :
 마찬가지로 content view를 control로 클릭하여 드래그하여 `Equal widths`를 multiplier를 1로 지정해줍니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/6.png" width="200px">
+  <img src="/assets/images/scrollview/6.png" width="320px">
 </p>
 
 <br>
@@ -105,13 +105,13 @@ sitemap :
 Height는 content view를 **스크롤 뷰에 꽉 차게** 늘린 후에 content view를 control을 누른 상태로 클릭하여 **자기 자신**에게 드래그하여 height를 지정해줍니다. 
 
 <p align="center">
-  <img src="/assets/images/scrollview/7.png" width="400px">
+  <img src="/assets/images/scrollview/7.png" width="520px">
 </p>
 
 그 뒤에 `contentView`의 height constraint의 priority를 250으로 낮춰줍니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/8.png" width="200px">
+  <img src="/assets/images/scrollview/8.png" width="320px">
 </p>
 
 <br>
@@ -119,7 +119,7 @@ Height는 content view를 **스크롤 뷰에 꽉 차게** 늘린 후에 content 
 오토레이아웃이 정상적으로 적용되고, 이제 경고가 뜨지 않는 것을 확인할 수 있습니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/9.png" width="400px">
+  <img src="/assets/images/scrollview/9.png" width="520px">
 </p>
 
 
@@ -167,7 +167,7 @@ class VerticalScrollViewController: UIViewController {
 #### 구현 화면
 
 <p align="center">
-  <img src="/assets/images/scrollview/vertical.gif" width="400px">
+  <img src="/assets/images/scrollview/vertical.gif" width="320px">
 </p>
 
 
