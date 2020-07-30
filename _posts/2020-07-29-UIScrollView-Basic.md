@@ -1,5 +1,5 @@
 ---
-title: "[iOS] UIScrollView 오토레이아웃과 함께 적용해보기"
+title: "[iOS] UIScrollView 스토리보드에서 오토 레이아웃으로 구현하기"
 header:
   teaser: /assets/images/ios-posts2.jpeg
   overlay_image: /assets/images/ios-posts2.jpeg
@@ -21,21 +21,21 @@ sitemap :
   priority : 1.0
 ---
 
-스크롤 뷰를 스토리보드에 오토레이아웃을 적용하여 구현해보자.
+스크롤 뷰를 스토리보드에 오토 레이아웃을 적용하여 구현해보자.
 
 <br>
 
 ### 들어가며
 
-스크롤 뷰는 개인적으로 사용할 때마다 바로바로 구현이 안되는 UIKit 중 하나입니다. 하지만 스크롤뷰는 사용하지 않을 수 없는 친구이기 때문에, 스크롤뷰를 오토레이아웃과 함께 사용하는 방법을 정리해보려고 합니다.
+스크롤 뷰는 개인적으로 사용할 때마다 헷갈리는 UIKit 중 하나입니다. 스크롤 뷰를 상속한 UIKit 요소들이 꽤 있기 때문에 스크롤 뷰는 사용하지 않을 수 없는 친구입니다. 이러한 스크롤 뷰를 **스토리보드**에서 오토 레이아웃과 함께 사용하는 방법을 정리해보려고 합니다.
 
-
+<br>
 
 #### UIScrollView
 
-`UIScrollView`는 `UITableView`, `UITextView`, `UICollecctionView`을 포함하여 몇가지 UIKit의 클래스들의 superclass입니다. 스크롤 뷰의 핵심은 스크롤되는 content와 보여지는 frame으로 나뉘어진다는 겁니다. 스크롤 되는 전체 content는 많지만 frame에 잘려서 스크롤 되는 것처럼 보여지는 겁니다.
+`UIScrollView`는 `UITableView`, `UITextView`, `UICollecctionView`을 포함하여 몇가지 UIKit의 클래스들의 superclass입니다. 스크롤 뷰의 핵심은 스크롤되는 **content**와 보여지는 **frame**으로 나뉘어진다는 겁니다. 스크롤 되는 전체 content는 많지만 frame에 잘려서 스크롤 되는 것처럼 보여지는 겁니다. 이 content와 frame 키워드를 잘 기억해주세요.
 
-
+<br>
 
 #### 개발 환경
 
@@ -44,9 +44,9 @@ sitemap :
 
 ### Vertical ScrollView in Storyboard
 
-전체화면을 세로로 스크롤 할 수 있도록 구현하도록
+스크롤 뷰를 통해서 **세로**로 스크롤 할 수 있도록 구현할 예정입니다.
 
-스크롤 뷰를 추가하기 전, 뷰컨트롤러의 뷰와 스크롤뷰를 구분하기 위해 뷰컨트롤러의 뷰의 background color를 주황색으로 변경하였습니다.
+스크롤 뷰를 추가하기 전, 뷰컨트롤러의 뷰와 스크롤뷰를 구분하기 위해 뷰컨트롤러의 뷰의 background color를 주황색으로 변경하였습니다. 이 뷰컨트롤러의 이름은 `VerticalViewController`라고 하겠습니다.
 
 <p align="center">
   <img src="/assets/images/scrollview/1.png" width="300px">
@@ -54,9 +54,12 @@ sitemap :
 
 <br>
 
-이제 스크롤 뷰를 추가하여 스크롤뷰의 auto layout을 superView에 leading, top, trailing, bottom anchor를 맞춰주고 constant를 0으로 잡아줍니다.
+이제 `VerticalViewController`에 **스크롤 뷰**를 추가하여 클릭한 뒤 스토리보드 오른쪽 아래에 있는 `Add New Constraints` 버튼을 눌러 스크롤 뷰의 auto layout을 줍니다. 아래 스크린샷과 같이 스크롤 뷰의 leading, top, trailing, bottom anchor를 스크롤 뷰의 superView의 leading, top, trailing, bottom anchor와 일치하게 constraint를 주고 constant는 0으로 잡아줍니다.
 
-위와 같이 constraint를 잡아주면, 자동으로 스크롤 뷰의 **frame layout guide**가 스크롤 뷰의 super view에 constraint가 잡혀집니다.
+스크롤 뷰가 스토리보드에서 자동으로 늘어나지 않으면, 직접 스크롤 뷰를 늘려주세요.
+{: .notice--warning}
+
+위와 같이 constraint를 잡아주면 스크롤 뷰의 `Frame Layout Guide`와 `Content Layout Guide` 중  `Frame Layout Guide`의 constraint를 설정한 것입니다.
 
 <p align="center">
   <img src="/assets/images/scrollview/2.png" width="520px">
@@ -64,7 +67,17 @@ sitemap :
 
 <br>
 
-스크롤 뷰의 leading, top, trailing, bottom constraint를 다 줬는데도 다음과 같이 경고가 뜨게 됩니다. 그 이유는 바로 스크롤 뷰의 content의 사이즈가 정해져 있지 않기 때문에 발생하는 경고입니다.
+위에서 스크롤 뷰의 leading, top, trailing, bottom에 constraint를 다 줬는데도 다음과 같이 경고가 뜨게 됩니다. 그 이유는 바로 스크롤 뷰의 **content**의 사이즈가 정해져 있지 않기 때문에 발생하는 경고입니다. 빨간 화살표 클릭하면 다음과 같은 경고가 뜨게 됩니다.
+
+<p align="center">
+  <img src="/assets/images/scrollview/warning.png" width="400px">
+</p>
+
+```
+Has ambiguous scrollable content width/height
+```
+
+content의 사이즈가 모호하다는 경고입니다.
 
 <p align="center">
   <img src="/assets/images/scrollview/3.png" width="540px">
@@ -72,43 +85,46 @@ sitemap :
 
 <br>
 
-스크롤 뷰에서 가장 중요한 것은 content의 사이즈인 **width와 height**가 정해져 있어야한다는 것입니다. 그러기 위해서 content를 담을 `contentView`라는 이름을 가진 `UIView`를 하나 만들어서 스크롤 뷰에 추가할 것입니다.
+스크롤 뷰에서 가장 중요한 것은 content의 사이즈인 **width와 height**가 정해져 있어야 합니다. frame이 정해져 있어도 실제로 화면에 보여줄 content가 없다면 의미가 없기 때문입니다. 그래서 content를 담을 `contentView`라는 이름을 가진 `UIView`를 하나 만들어서 스크롤 뷰에 추가합니다.
 
 <p align="center">
   <img src="/assets/images/scrollview/4.png" width="540px">
 </p>
-
 <br>
 
-추가된 `contentView`는 스크롤 뷰의 `Content Layout Guide`에 leading, top, trailing, bottom anchor를 constant 0으로 잡아줍니다.
+이 `contentView`는 스크롤 뷰의 `Content Layout Guide`를 오토 레이아웃을 사용해 꽉 채워 줄 것입니다.
+
+`contentView`를 `control`을 누른상태로 `Content Layout Guide`에 드래그하여 오토 레이아웃을 줄 수 있습니다. 드래그를 하면 오토 레이아웃을 줄 때 `Leading Space to Content Layout Guide`라는 옵션을 볼 수 있는데, `contentView`의 leading anchor와 `Content Layout Guide`의 leading anchor를 일치하게 하면서 현재 스토리보드에서 보여지는 두 anchor의 차이만큼 거리(spacing)을 주겠다는 의미입니다.
+
+따라서 먼저 `contentView`를 수동으로 늘려서 constraint를 줘도 되고, 먼저 constraint를 주고 XCode의 오른쪽 inspector 창에서 `contentView`의 leading, top, trailing, bottom anchor constraint의 constant를 0으로 잡아줘도 됩니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/5-1.png" width="400px"> <img src="/assets/images/scrollview/5-2.png" width="400px">
+  <img src="/assets/images/scrollview/5-1.png" width="540px">
+  <br>
+  <img src="/assets/images/scrollview/5-2.png" width="540px">
 </p>
-
 이렇게 Constraint를 잡아줘도 `contentView`의 실질적인 width와 height가 명확하게 없기 때문에 경고가 뜨게 됩니다. 
+
+<br>
 
 #### Content View 사이즈 잡아주기
 
-세로로 스크롤을 하기 위해서는 가로는 고정되고 세로는 동적으로 늘어날 수 있어야합니다.
+세로로 스크롤을 하기 위해서는 가로는 고정되고 세로는 동적으로 늘어날 수 있어야합니다. 
 
-먼저 contentView의 width를 스크롤 뷰의 `Frame Layout Guide`와 동일하도록 지정한다.
-
-마찬가지로 content view를 control로 클릭하여 드래그하여 `Equal widths`를 multiplier를 1로 지정해줍니다.
+먼저 `contentView`의 width를 스크롤 뷰의 `Frame Layout Guide`와 동일하도록 지정한다. 마찬가지로 `contentView`를 control을 클릭한 상태로 드래그하여 `Equal widths`를 multiplier를 1로 지정해줍니다.
 
 <p align="center">
-  <img src="/assets/images/scrollview/6.png" width="320px">
+  <img src="/assets/images/scrollview/6.png" width="400px">
 </p>
 
 <br>
 
-Height는 content view를 **스크롤 뷰에 꽉 차게** 늘린 후에 content view를 control을 누른 상태로 클릭하여 **자기 자신**에게 드래그하여 height를 지정해줍니다. 
+Height는 content view를 **스크롤 뷰에 꽉 차게** 늘린 후(이전 단계에서 늘렸다면 그대로 하시면 됩니다.)에 content view를 control을 누른 상태로 클릭하여 **자기 자신**에게 드래그하여 height를 지정해줍니다. 이렇게 되면 height는 현재 스토리보드에 보여지는 `contentView`의 height인 고정값으로 지정되게 됩니다.
 
 <p align="center">
   <img src="/assets/images/scrollview/7.png" width="520px">
 </p>
-
-그 뒤에 `contentView`의 height constraint의 priority를 250으로 낮춰줍니다.
+우리는 `contentView`가 안의 더 들어올 수 있는 UI 요소들에 따라서 동적으로 늘려줘야 합니다. 따라서 `contentView`의 height constraint의 priority를 250으로 낮춰줍니다. 이렇게 되면 `contentView`의 height는 완전히 고정된 값이 아니게 되어 동적으로 바뀔 수 있습니다. 
 
 <p align="center">
   <img src="/assets/images/scrollview/8.png" width="320px">
@@ -116,7 +132,7 @@ Height는 content view를 **스크롤 뷰에 꽉 차게** 늘린 후에 content 
 
 <br>
 
-오토레이아웃이 정상적으로 적용되고, 이제 경고가 뜨지 않는 것을 확인할 수 있습니다.
+사이즈까지 정상적으로 constraint를 줬다면, 오토레이아웃이 정상적으로 적용되고, 스토리보드에 경고가 뜨지 않는 것을 확인할 수 있습니다.
 
 <p align="center">
   <img src="/assets/images/scrollview/9.png" width="520px">
@@ -124,14 +140,12 @@ Height는 content view를 **스크롤 뷰에 꽉 차게** 늘린 후에 content 
 
 
 
-이제 여기에 `UIStackView`를 하나 추가하여 `contentView`에 꽉 차도록 오토레이아웃을 준 후에 `@IBOutlet`으로 stackView를 프로퍼티로 만들어서 아래와 같이 코드를 작성합니다.
-
-아래 코드는 랜덤 색상의 100에서 400 높이를 가진 10개의 뷰를 생성하여 stackView에 넣어주는 코드입니다.
+이제 여기에 `UIStackView`를 하나 추가하여 동적으로 스크롤 뷰의 content가 잘 늘어나는지 확인해보도록 하겠습니다. 스택 뷰를 `contentView`에 꽉 차도록 오토레이아웃을 준 후에 `@IBOutlet`으로 스택 뷰를 프로퍼티로 만들어서 아래와 같이 코드를 작성합니다. 일정한 랜덤의 크기와 랜덤한 색의 뷰를 생성하여 스택 뷰에 추가해주는 코드입니다.
 
 ```swift
 import UIKit
 
-class VerticalScrollViewController: UIViewController {
+class VerticalViewController: UIViewController {
 
     @IBOutlet weak var verticalStackView: UIStackView!
     
@@ -148,6 +162,7 @@ class VerticalScrollViewController: UIViewController {
         }
     }
     
+    // 랜덤 색상, 100~400 height를 가진 뷰 생성 함수
     private func randomColoredView() -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor(
@@ -166,20 +181,19 @@ class VerticalScrollViewController: UIViewController {
 
 #### 구현 화면
 
+추가된 10개의 View가 모두 스택 뷰로 들어가 정상적으로 스크롤이 되는 것을 확인할 수 있습니다.
+
 <p align="center">
   <img src="/assets/images/scrollview/vertical.gif" width="320px">
 </p>
-
-
-
 <br>
 
 ### 마치며
 
-
+`UIScrollView`는 처음에 사용해보기 까다로운 친구입니다. 하지만 content와 frame 개념을 잘 숙지하면 기본적인 스크롤 뷰를 만드는 것에는 큰 어려움이 없는 것 같습니다. 하지만 스크롤 뷰는 정말 많이 사용되고 애니메이션에서도 많이 사용되기 때문에 아직 공부해야할 부분이 많은 것 같습니다. 읽어주셔서 감사합니다. 피드백은 언제나 환영입니다. 😀
 
 <br>
 
 #### References
 
-- 
+- [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview)
