@@ -333,7 +333,6 @@ Struct Label {
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/2_attachment_7.png" width="800px">
 </p>
-
 <br>
 
 Struct에서 여러개의 레퍼런스를 사용하는 프로퍼티를 사용하게 되면, 클래스보다 성능이 더 안좋아질 수 있습니다. 이러한 방법으로 프로퍼티들의 타입을 변경하시면, 레퍼런스 카운팅 오버헤드를 줄일 수 있습니다.
@@ -342,19 +341,196 @@ Struct에서 여러개의 레퍼런스를 사용하는 프로퍼티를 사용하
 
 ## Method Dispatch
 
-Method dispatch는 프로그램이 어떤 메소드 호출할 것인지를 결정하여 그 메소드를 호출하는 과정을 뜻합니다. 어떤 메소드인지 결정되는 시점에 따라 static, dynamic으로 나뉘게 됩니다.
+Method dispatch는 프로그램이 어떤 메소드를 호출할 것인지 결정하여 그 메소드를 호출하는 과정을 뜻합니다. 어떤 메소드인지 **결정되는 시점**에 따라 **static method dispatch** 와 **dynamic method dispatch**로 나뉘게 됩니다.
 
-### Static Method Dispatch
+#### Static Method Dispatch
 
-Static method dispatch는 컴파일 시점에 메소드의 실제 코드 위치를 안다면 실행 중 찾는 과정 없이 바로 해당 코드 주소로 점프할 수 있습니다. 컴파일러의 최적화 메소드 인라이닝이 가능합니다.
+Static method dispatch는 컴파일 시점에 컴파일러가 메소드의 실제 코드 위치를 파악할 수 있어 런타임에 찾는 과정 없이 바로 해당 코드를 실행하는 것을 의미합니다.
 
-### Dynamic Method Dispatch
+구현된 코드들이 어디서 실행되는지 알 수 있기 때문에 **메소드 인라이닝**과 같은 코드 최적화를 적극적으로 시행합니다.
 
-런타임 시 V-Table을 참조하여 method dispatch를 진행합니다.
+**메소드 인라이닝(Method Inlining)**은 메소드를 호출 할 때 실제 메소드를 호출하지 않고 바로 결과값을 돌려주어 성능을 향상 시키는 것입니다.
+{: .notice--warning}
+
+#### Dynamic Method Dispatch
+
+Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는지 판단할 수 없어, 런타임에 table에 구현을 참조하여 해당 메소드에 대한 정보를 가져와서 코드를 실행시키는 것을 의미합니다. 
+
+사실 dynamic dispatch는 static dispatch보다 그렇게 많은 비용을 필요로 하지는 않습니다. 레퍼런스 카운팅, 힙 할당과 같은 쓰레드 동기 오버헤드가 없습니다. 
+
+하지만 컴파일러는 static dispatch에서는 최적화 작업이 가능하지만, Dynamic dispatch에서는 컴파일러가 추론할 수 없습니다.
 
 <br>
 
-#### References
+> #### Method Inlining in Struct
+
+아래 예제에서는 `Point` 구조체는 draw라는 메소드를 가지고 있으며, `drawAPoint()`라는 메소드는 `Point` 타입을 파라미터로 받아서 인스턴스의 `draw()` 메소드를 호출합니다. 그리고 `(0,0)` `Point` 인스턴스를 생성해 `drawAPoint()` 메소드에게 넘겨줬습니다.
+
+`drawAPoint()`, `point.draw()` 이 두개의 메소드 모두 **static dispatch**입니다. 컴파일러는 코드가 어디에서 실행될지 정확히 알고 있다는 뜻입니다. 
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_1.png" width="800px">
+</p>
+
+<br>
+
+그렇기 때문에 `drawAPoint()` 메소드는 컴파일 시점에서 `point.draw()`로 바뀌게 됩니다.
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_2.png" width="800px">
+</p>
+
+<br>
+
+`point.draw()`도 마찬가지로  static dispatch이기 때문에 컴파일 타임에 `point.draw()`의 실제 구현된 코드로 바뀌게 됩니다. 이와 같이 실제 구현부로 대체되는 것이 메소드 인라이닝입니다.
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_3.png" width="800px">
+</p>
+
+<br>
+
+> #### Static Dispatch
+
+위에서 메소드 인라이닝 된 프로그램의 컴파일을 마치고 실행하여 런타임으로 들어가게 되면, 아래와 같이 추가 작업이 발생하지 않고 실행 후 종료가 됩니다. 
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_4.png" width="800px">
+</p>
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_5.png" width="800px">
+</p>
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_6.png" width="800px">
+</p>
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_7.png" width="800px">
+</p>
+
+여기서 우리는 두개의 **static dispatch**에 대해 [콜 스택](https://ko.wikipedia.org/wiki/콜_스택)을 구성하거나 분해하는데 있어서는 별다른 오버헤드가 발생하지 않는 것을 확인할 수 있습니다. 메소드 인라이닝 덕분에 메소드 호출에서 다른 추가 작업이 필요없다는 의미입니다. 
+
+아직 dynamic dispatch를 보진 않았지만, 단일 static dispatch, dynamic dispatch의 차이는 크지 않습니다. 하지만 여러개 method dispatch가 발생하는 dispatch chain에서는 static dispatch 체인에서는 컴파일러가 모두 파악할 수 있는 반면에, Dynamic dispatch 체인에서는 컴파일러가 추론할 수 없습니다. 
+
+컴파일러는 static method dispatch 체인을 메소드 인라이닝으로 붕괴시켜서 콜 스택 오버헤드 없이 단일 구현 형태로 바꿀 수 있습니다. 이를 통해 우리는 static dispatch는 상당히 빠른 처리를 할 수 있다는 것을 알 수 있습니다.
+
+<br>
+
+> #### Why Dynamic dispatch?
+
+그렇다면 왜 dynamic dispatch가 필요한 것일까요?
+
+가장 큰 이유는 **다형성** 때문입니다.
+
+전통적인 객체지향 프로그램의 예시를 살펴보도록 하겠습니다. `Drawable`은 추상화된 수퍼클래스이며 `Point`, `Line`은 `Drawable`의 서브클래스입니다.
+
+각 서브클래스들은 `draw()` 함수를 오버라이드하여 각자 구현을 하고 다형성을 따라 `drawables`라는 `Drawable` 배열을 생성하였습니다. 
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_1.png" width="800px">
+</p>
+
+<br>
+
+`Drawable`, `Point`, `Line`은 모두 **클래스**이기 때문에 우리는 이들의 배열을 만들게 되면 배열의 각 원소들은 모두 같은 사이즈로 저장이 됩니다. 왜냐하면 우리는 이 친구들을 **레퍼런스**로 배열에 저장하기 때문입니다. 
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_2.png" width="800px">
+</p>
+
+<br>
+
+우리는 for문을 사용하여 배열을 순회하며 `draw()` 메소드를 호출할 것입니다.
+
+```swift
+for d in drawables {
+	d.draw
+}
+```
+
+여기서 컴파일러가 컴파일 타임에 `draw()` 메소드를 정확한 구현 부로 대체할 수 있을까요? Static method dispatch의 메소드 인라이닝과 같이 해당 메소드의 body 구현 부를 대체하는 것은 불가능해 보입니다. `d.draw()`의 `d`는 포인트가 될 수도, 라인이 될 수도 있기 때문입니다. 발표에서는 다른 code path를 가직고 있다고 언급합니다.
+
+이를 해결하기 위해서 컴파일러는 클래스에 **필드**를 하나 더 추가합니다. 이 필드는 클래스의 타입 정보에 대한 포인터이며 타입 정보는 static memory에 저장되어 있습니다.
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_3.png" width="800px">
+</p>
+
+<br>
+
+이제 draw 메소드를 호출할 때, 컴파일러는 우리를 대신해 static memory에 있는 타입 정보를 보고 실행되어야 할 구현 부를 가리키는 포인터가 있는 **virtial method table**를 통해 메소드를 호출합니다. 이 table은 V-Table이라고도 불립니다.
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_4.png" width="800px">
+</p>
+
+<br>
+
+그래서 우리를 대신해서 컴파일러가 어떻게 `d.draw()`를 타입에 맞게 메소드를 호출하는지 확인해보면 virtual method table을 통해 실행에 올바른 `draw()` 구현 부를 찾는 것을 볼 수 있습니다.
+
+```swift
+	d.type.vtable.draw(d)
+```
+
+그리고 실제 인스턴스를 암묵적 self-parameter로 넘겨줍니다. (d를 파라미터에 넘겨준 것)
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_5.png" width="800px">
+</p>
+
+<br>
+
+### Summary
+
+> #### Class
+
+클래스는 기본적으로 dynamic dispatch로 메소드를 호출합니다. Dynamic dispatch 자체로는 static dispatch와 큰 차이는 없지만, 메소드 체이닝과 같은 상황에서는 인라이닝과 같은 최적화를 할 수 없습니다.
+
+클래스의 성능은 다음과 같습니다. 클래스는 기본적으로 heap allocation을 사용하고, 이로 인해 reference counting이 발생하게 됩니다. 또한 dynamic dispatch로 메소드를 호출합니다.
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_3_dimensions_of_performance_1.png" width="800px">
+</p>
+
+<br>
+
+> #### final Class
+
+서브클래스를 만들지 않을 클래스라면, `final`을 클래스 앞에 선언하여 컴파일러가 static하게 dispatch하게 할 수 있습니다. 또한 팀원들에게도 서브클래스 하지 않을 의도를 보여줄 수 있습니다.
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_3_dimensions_of_performance_2.png" width="800px">
+</p>
+
+<br>
+
+> #### Struct
+
+Struct의 성능은 다음과 같습니다.
+
+<p align="center">
+  <img src="/assets/images/understanding-swift-performance/3_3_dimensions_of_performance_3.png" width="800px">
+</p>
+
+<br>
+
+## Conclusion
+
+여기까지 스위프트의 성능에 영향을 주는 것을 3가지, **allocation, reference couting, method dispatch**를 살펴보았습니다. 이제 코드를 작성하거나 읽을 때, 작성된 인스턴스가 stack과 heap 중 어디에 할당되는가? 이 인스턴스로 인해 reference counting overhead가 발생하는가? 이 인스턴스에서 메소드를 호출하면, static하게 또는 dynamic하게 호출되는가?를 고려하며 코드를 작성할 수 있으면 좋을 것 같습니다.
+
+만약 필요치 않게 비용을 지불하고 있다면, 우리의 프로그램 성능에 영향을 주게 될 것입니다.
+
+개인적으로 저는 String은 value type이여서 stack allocation으로 비용이 적게 들 줄 알았는데, heap allocation이 발생하는 것과 struct 내에 레퍼런스는 class 보다 더 많은 오버헤드가 발생할 수 있다는 점이 충격이었습니다. 😵 
+
+Apple에서 왜 struct를 사용하라고 권장하는지도 조금 더 이해가 되는 것 같습니다. 하지만 클래스가 꼭 필요한 상황에서는 클래스를 사용할 수 밖에 없는 것 같아요. 항상 좋다고만 해서 바로 사용할 수는 없는 것 같습니다! 아직 해당 WWDC 발표의 모든 부분을 정리한게 아니기 때문에 남은 부분을 추후에 정리해서 포스팅할 예정입니다. 읽어주셔서 감사합니다! 😁
+
+<br>
+
+### References
 
 - [Understanding Swift Performance](https://developer.apple.com/videos/play/wwdc2016/416/)
 - [When and How to Use Value and Reference Types in Swift](https://khawerkhaliq.com/blog/swift-value-types-reference-types/)
+
+<br>
