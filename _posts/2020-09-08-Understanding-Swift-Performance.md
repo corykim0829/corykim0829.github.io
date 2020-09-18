@@ -25,7 +25,7 @@ struct와 class의 성능에 대해 자세히 알아보자
 스위프트 코드 작성에 있어서, 좋은 성능을 고려하는 것은 당연한 개발자로써 당연한 것일 겁니다. 이번 글에서는 성능에 영향을 주는 것 중에서 다음 세가지를 중심적으로 이야기해보려고 합니다.
 
 - **Allocation**: 인스턴스를 생성하면 Stack과 Heap 중 어느 곳에 **할당** 되는 지
-- **Reference Counting**: 인스턴스를 통해 생기는 **레퍼런스 카운트**가 몇번 생기는 지
+- **Reference Counting**: 인스턴스를 통해 **레퍼런스 카운트**가 몇개가 발생하는지
 - **Method Dispatch**: 인스턴스에서 메소드를 호출했을 때, **메소드 디스패치**가 정적인지 동적인지
 
 <br>
@@ -110,9 +110,9 @@ let key = "\(color):\(orientation):\(tail)"
 
 >#### 문제점 파악하기
 
-먼저 성능과는 별개의 이야기로 `key`는 `String` 타입이기 때문에 다른 값이 들어갈 수 있는 **위험**이 있습니다. 또한 `String`은 heap에 `character`타입으로 문자들을 간접적으로 저장되기 때문에 `String`을 사용하게되면 **heap allocation**이 발생합니다. 위와 같은 구조에서는 `makeBalloon`함수를 호출할 때마다, `key`로 인하여 heap allocation이 발생합니다.
+먼저 성능과는 별개의 이야기로 `key`는 `String` 타입이기 때문에 다른 값이 들어갈 수 있는 **위험**이 있습니다. 또한 `String`은 value type이지만, heap에 `character`타입으로 문자들을 간접적으로 저장되기 때문에 `String`을 사용하게되면 **heap allocation**이 발생합니다. 그렇기 때문에 위와 같은 구조에서는 `makeBalloon`함수를 호출할 때마다, `key`로 인하여 heap allocation이 발생합니다.
 
-이렇게 `String`은 heap allocation을 발생시키고, Dictionary의 key로 사용하기에는 안전성이 떨어집니다.
+이렇게 `String`은 Dictionary의 key로 사용하기에는 안전성이 떨어지고, Heap allocation을 발생시킵니다.
 
 <br>
 
@@ -122,9 +122,9 @@ let key = "\(color):\(orientation):\(tail)"
 
 ```swift
 struct Attributes: Hashable {
-	var color: Color
-	var orientation: Orientation
-	var tail: Tail
+    var color: Color
+    var orientation: Orientation
+    var tail: Tail
 }
 ```
 
@@ -414,9 +414,9 @@ Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는�
 
 여기서 우리는 두개의 **static dispatch**에 대해 [콜 스택](https://ko.wikipedia.org/wiki/콜_스택)을 구성하거나 분해하는데 있어서는 별다른 오버헤드가 발생하지 않는 것을 확인할 수 있습니다. 메소드 인라이닝 덕분에 메소드 호출에서 다른 추가 작업이 필요없다는 의미입니다. 
 
-아직 dynamic dispatch를 보진 않았지만, 단일 static dispatch, dynamic dispatch의 차이는 크지 않습니다. 하지만 여러개 method dispatch가 발생하는 dispatch chain에서는 static dispatch 체인에서는 컴파일러가 모두 파악할 수 있는 반면에, Dynamic dispatch 체인에서는 컴파일러가 추론할 수 없습니다. 
+아직 dynamic dispatch를 보진 않았지만, 단일 static dispatch, dynamic dispatch의 차이는 크지 않습니다. 하지만 여러개 method dispatch가 발생하는 **dispatch chain**에서는 차이가 있습니다. Static dispatch 체인에서는 컴파일러가 모두 파악할 수 있는 반면에, Dynamic dispatch 체인에서는 컴파일러가 추론할 수 없습니다. 
 
-컴파일러는 static method dispatch 체인을 메소드 인라이닝으로 붕괴시켜서 콜 스택 오버헤드 없이 단일 구현 형태로 바꿀 수 있습니다. 이를 통해 우리는 static dispatch는 상당히 빠른 처리를 할 수 있다는 것을 알 수 있습니다.
+컴파일러는 static method dispatch 체인을 메소드 인라이닝으로 붕괴시켜서 콜 스택 오버헤드 없이 단일 구현 형태, 즉 하나의 코드 덩어리로 바꿀 수 있습니다. 이를 통해 우리는 static dispatch는 상당히 빠른 처리를 할 수 있다는 것을 알 수 있습니다.
 
 <br>
 
@@ -448,11 +448,11 @@ Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는�
 
 ```swift
 for d in drawables {
-	d.draw
+    d.draw
 }
 ```
 
-여기서 컴파일러가 컴파일 타임에 `draw()` 메소드를 정확한 구현 부로 대체할 수 있을까요? Static method dispatch의 메소드 인라이닝과 같이 해당 메소드의 body 구현 부를 대체하는 것은 불가능해 보입니다. `d.draw()`의 `d`는 포인트가 될 수도, 라인이 될 수도 있기 때문입니다. 발표에서는 다른 code path를 가직고 있다고 언급합니다.
+여기서 컴파일러가 컴파일 타임에 `draw()` 메소드를 정확한 구현 부로 대체할 수 있을까요? Static method dispatch의 메소드 인라이닝과 같이 해당 메소드의 body 구현 부를 대체하는 것은 불가능해 보입니다. `d.draw()`의 `d`는 `Point`가 될 수도, `Line`이 될 수도 있기 때문입니다. 발표에서는 `Point`와 `Line`다른 code path를 가지고 있다고 언급합니다.
 
 이를 해결하기 위해서 컴파일러는 클래스에 **필드**를 하나 더 추가합니다. 이 필드는 클래스의 타입 정보에 대한 포인터이며 타입 정보는 static memory에 저장되어 있습니다.
 
@@ -526,7 +526,14 @@ Struct의 성능은 다음과 같습니다.
 
 개인적으로 저는 String은 value type이여서 stack allocation으로 비용이 적게 들 줄 알았는데, heap allocation이 발생하는 것과 struct 내에 레퍼런스는 class 보다 더 많은 오버헤드가 발생할 수 있다는 점이 충격이었습니다. 😵 
 
-Apple에서 왜 struct를 사용하라고 권장하는지도 조금 더 이해가 되는 것 같습니다. 하지만 클래스가 꼭 필요한 상황에서는 클래스를 사용할 수 밖에 없는 것 같아요. 항상 좋다고만 해서 바로 사용할 수는 없는 것 같습니다! 아직 해당 WWDC 발표의 모든 부분을 정리한게 아니기 때문에 남은 부분을 추후에 정리해서 포스팅할 예정입니다. 읽어주셔서 감사합니다! 😁
+Apple에서 왜 struct를 사용하라고 권장하는지도 조금 더 이해가 되는 것 같습니다. 하지만 struct의 성능이 좋다고 해서 무조건 struct를 사용하는것은 바람직하지 않다고 생각이 듭니다. 또한 class를 사용할 수 밖에 없는 상황도 많이 있기 때문이죠. 아직 해당 WWDC 발표의 모든 부분을 정리한게 아니기 때문에 남은 부분을 추후에 정리해서 포스팅할 예정입니다. 읽어주셔서 감사합니다! 😁
+
+<br>
+
+### 도움 주신 고마운 분들 🌼
+
+- Olaf
+- Gangwoon
 
 <br>
 
