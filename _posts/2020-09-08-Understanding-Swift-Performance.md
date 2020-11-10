@@ -504,13 +504,9 @@ Struct의 성능은 다음과 같습니다.
 
 <br>
 
-## Conclusion
+## 마치며
 
-여기까지 스위프트의 성능에 영향을 주는 것을 3가지, **allocation, reference couting, method dispatch**를 살펴보았습니다. 이제 코드를 작성하거나 읽을 때, 작성된 인스턴스가 stack과 heap 중 어디에 할당되는가? 이 인스턴스로 인해 reference counting overhead가 발생하는가? 이 인스턴스에서 메소드를 호출하면, static하게 또는 dynamic하게 호출되는가?를 고려하며 코드를 작성할 수 있으면 좋을 것 같습니다.
-
-만약 필요치 않게 비용을 지불하고 있다면, 우리의 프로그램 성능에 영향을 주게 될 것입니다.
-
-개인적으로 저는 String은 value type이여서 stack allocation으로 비용이 적게 들 줄 알았는데, heap allocation이 발생하는 것과 struct 내에 레퍼런스는 class 보다 더 많은 오버헤드가 발생할 수 있다는 점이 충격이었습니다. 😵 
+여기까지 스위프트의 성능에 영향을 주는 것을 3가지, **allocation, reference couting, method dispatch**를 살펴보았습니다. 이제 코드를 작성하거나 리뷰할 때, 이 세가지를 고려해보면 좋을 것 같습니다.
 
 Apple에서 왜 struct를 사용하라고 권장하는지도 조금 더 이해가 되는 것 같습니다. 하지만 struct의 성능이 좋다고 해서 무조건 struct를 사용하는것은 바람직하지 않다고 생각이 듭니다. 또한 class를 사용할 수 밖에 없는 상황도 많이 있기 때문이죠. 아직 해당 WWDC 발표의 모든 부분을 정리한게 아니기 때문에 남은 부분을 추후에 정리해서 포스팅할 예정입니다. 읽어주셔서 감사합니다! 😁
 
