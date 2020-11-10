@@ -351,7 +351,7 @@ Static method dispatch는 컴파일 시점에 컴파일러가 메소드의 실�
 
 구현된 코드들이 어디서 실행되는지 알 수 있기 때문에 **메소드 인라이닝**과 같은 코드 최적화를 적극적으로 시행합니다.
 
-**메소드 인라이닝(Method Inlining)**은 메소드를 호출 할 때 실제 메소드를 호출하지 않고 바로 결과값을 돌려주어 성능을 향상 시키는 것입니다.
+**메소드 인라이닝(Method Inlining)**은 메소드를 호출 할 때 해당 메소드로 이동하지 않고 메소드의 결과값을 바로 반환하여 성능을 향상 시키는 것입니다.
 {: .notice--warning}
 
 #### Dynamic Method Dispatch
@@ -364,11 +364,9 @@ Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는�
 
 <br>
 
-> #### Method Inlining in Struct
+> #### Method Dispatch in Struct
 
-아래 예제에서는 `Point` 구조체는 draw라는 메소드를 가지고 있으며, `drawAPoint()`라는 메소드는 `Point` 타입을 파라미터로 받아서 인스턴스의 `draw()` 메소드를 호출합니다. 그리고 `(0,0)` `Point` 인스턴스를 생성해 `drawAPoint()` 메소드에게 넘겨줬습니다.
-
-`drawAPoint()`, `point.draw()` 이 두개의 메소드 모두 **static dispatch**입니다. 컴파일러는 코드가 어디에서 실행될지 정확히 알고 있다는 뜻입니다. 
+먼저 구조체에서 method dispatch는 어떻게 처리되는지 보겠습니다. `Point` 구조체는 draw라는 메소드를 가지고 있으며, `drawAPoint()` 메소드는 `Point` 타입을 파라미터로 받아서 인스턴스의 `draw()` 메소드를 호출합니다. 그리고 `(0,0)` `Point` 인스턴스를 생성해 `drawAPoint()` 메소드에게 넘겨줬습니다.
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_1.png" width="800px">
@@ -376,25 +374,17 @@ Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는�
 
 <br>
 
-그렇기 때문에 `drawAPoint()` 메소드는 컴파일 시점에서 `point.draw()`로 바뀌게 됩니다.
+`drawAPoint()`, `point.draw()` 이 두개의 메소드 모두 컴파일러가 명확하게 컴파일 시점에 코드를 파악할 수 있습니다. 따라서 static dispatch이며, 컴파일 시점에 두 메소드는 때문에 메소드 인라이닝이 됩니다.
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_2.png" width="800px">
 </p>
-
-<br>
-
-`point.draw()`도 마찬가지로  static dispatch이기 때문에 컴파일 타임에 `point.draw()`의 실제 구현된 코드로 바뀌게 됩니다. 이와 같이 실제 구현부로 대체되는 것이 메소드 인라이닝입니다.
-
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_3.png" width="800px">
 </p>
-
 <br>
 
-> #### Static Dispatch
-
-위에서 메소드 인라이닝 된 프로그램의 컴파일을 마치고 실행하여 런타임으로 들어가게 되면, 아래와 같이 추가 작업이 발생하지 않고 실행 후 종료가 됩니다. 
+컴파일을 마치고 런타임으로 들어가게 되면, 아래와 같이 실행 후 바로 종료가 됩니다.
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_4.png" width="800px">
@@ -411,16 +401,15 @@ Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는�
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_1_static_dispatch_7.png" width="800px">
 </p>
+여기서 우리는 두개의 **static dispatch**을 처리하는 과정에서는 별다른 오버헤드가 발생하지 않는 것을 확인할 수 있습니다. 메소드 인라이닝 덕분에 런타임에는 메소드 호출에서 다른 추가 작업이 필요없기 때문입니다.
 
-여기서 우리는 두개의 **static dispatch**에 대해 [콜 스택](https://ko.wikipedia.org/wiki/콜_스택)을 구성하거나 분해하는데 있어서는 별다른 오버헤드가 발생하지 않는 것을 확인할 수 있습니다. 메소드 인라이닝 덕분에 메소드 호출에서 다른 추가 작업이 필요없다는 의미입니다. 
+단일 static dispatch와 dynamic dispatch의 차이는 크지 않습니다. 하지만 여러개 method dispatch가 발생하는 **dispatch chain**에서는 차이가 있습니다. Static dispatch chain에서는 컴파일러가 모두 파악할 수 있는 반면에, Dynamic dispatch chain에서는 컴파일러가 추론할 수 없습니다. 
 
-아직 dynamic dispatch를 보진 않았지만, 단일 static dispatch, dynamic dispatch의 차이는 크지 않습니다. 하지만 여러개 method dispatch가 발생하는 **dispatch chain**에서는 차이가 있습니다. Static dispatch 체인에서는 컴파일러가 모두 파악할 수 있는 반면에, Dynamic dispatch 체인에서는 컴파일러가 추론할 수 없습니다. 
-
-컴파일러는 static method dispatch 체인을 메소드 인라이닝으로 붕괴시켜서 콜 스택 오버헤드 없이 단일 구현 형태, 즉 하나의 코드 덩어리로 바꿀 수 있습니다. 이를 통해 우리는 static dispatch는 상당히 빠른 처리를 할 수 있다는 것을 알 수 있습니다.
+컴파일러는 static method dispatch chain을 메소드 인라이닝으로 붕괴시켜서 콜 스택 오버헤드 없이 단일 구현 형태, 즉 하나의 코드 덩어리로 바꿀 수 있습니다. 이를 통해 우리는 static dispatch를 통해 빠른 처리를 할 수 있다는 것을 알 수 있습니다.
 
 <br>
 
-> #### Why Dynamic dispatch?
+> #### Dynamic dispatch in Class
 
 그렇다면 왜 dynamic dispatch가 필요한 것일까요?
 
@@ -428,7 +417,7 @@ Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는�
 
 전통적인 객체지향 프로그램의 예시를 살펴보도록 하겠습니다. `Drawable`은 추상화된 수퍼클래스이며 `Point`, `Line`은 `Drawable`의 서브클래스입니다.
 
-각 서브클래스들은 `draw()` 함수를 오버라이드하여 각자 구현을 하고 다형성을 따라 `drawables`라는 `Drawable` 배열을 생성하였습니다. 
+각 서브클래스들은 `draw()` 함수를 오버라이드하여 각자 구현을 하고 다형성을 따라 `drawables`라는 `Drawable` 배열을 생성하였습니다.
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_1.png" width="800px">
@@ -436,7 +425,7 @@ Dynamic method dispatch는 컴파일 타임에 어떤 메소드를 호출하는�
 
 <br>
 
-`Drawable`, `Point`, `Line`은 모두 **클래스**이기 때문에 우리는 이들의 배열을 만들게 되면 배열의 각 원소들은 모두 같은 사이즈로 저장이 됩니다. 왜냐하면 우리는 이 친구들을 **레퍼런스**로 배열에 저장하기 때문입니다. 
+`Drawable`, `Point`, `Line`은 모두 **클래스**이기 때문에 우리는 이들의 배열을 만들게 되면 배열의 각 원소들은 모두 같은 사이즈로 저장이 됩니다. 왜냐하면 우리는 이 친구들을 **레퍼런스**, 주소값으로 배열에 저장하기 때문입니다. 
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_2.png" width="800px">
@@ -452,7 +441,7 @@ for d in drawables {
 }
 ```
 
-여기서 컴파일러가 컴파일 타임에 `draw()` 메소드를 정확한 구현 부로 대체할 수 있을까요? Static method dispatch의 메소드 인라이닝과 같이 해당 메소드의 body 구현 부를 대체하는 것은 불가능해 보입니다. `d.draw()`의 `d`는 `Point`가 될 수도, `Line`이 될 수도 있기 때문입니다. 발표에서는 `Point`와 `Line`다른 code path를 가지고 있다고 언급합니다.
+여기서 컴파일러가 컴파일 타임에 `draw()` 메소드를 정확한 구현 부로 대체할 수 있을까요? Static method dispatch의 메소드 인라이닝과 같이 해당 메소드의 body 구현 부를 대체하는 것은 불가능해 보입니다. `d.draw()`의 `d`는 `Point`가 될 수도, `Line`이 될 수도 있기 때문입니다.
 
 이를 해결하기 위해서 컴파일러는 클래스에 **필드**를 하나 더 추가합니다. 이 필드는 클래스의 타입 정보에 대한 포인터이며 타입 정보는 static memory에 저장되어 있습니다.
 
