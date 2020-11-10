@@ -459,27 +459,24 @@ for d in drawables {
 
 <br>
 
-그래서 우리를 대신해서 컴파일러가 어떻게 `d.draw()`를 타입에 맞게 메소드를 호출하는지 확인해보면 virtual method table을 통해 실행에 올바른 `draw()` 구현 부를 찾는 것을 볼 수 있습니다.
+그래서 컴파일러가 어떻게 `d.draw()`를 타입에 맞게 메소드를 호출하는지 확인해보면 virtual method table을 통해 실행에 올바른 `draw()` 구현 부를 찾는 것을 볼 수 있습니다.
 
 ```swift
 	d.type.vtable.draw(d)
 ```
 
-그리고 실제 인스턴스를 암묵적 self-parameter로 넘겨줍니다. (d를 파라미터에 넘겨준 것)
+그리고 실제 인스턴스를 암묵적 self-parameter로 넘겨줍니다. 즉, d를 파라미터로 넘겨준 것이죠.
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_2_polymorphism_dynamic_dispatch_5.png" width="800px">
 </p>
-
 <br>
 
 ### Summary
 
 > #### Class
 
-클래스는 기본적으로 dynamic dispatch로 메소드를 호출합니다. Dynamic dispatch 자체로는 static dispatch와 큰 차이는 없지만, 메소드 체이닝과 같은 상황에서는 인라이닝과 같은 최적화를 할 수 없습니다.
-
-클래스의 성능은 다음과 같습니다. 클래스는 기본적으로 heap allocation을 사용하고, 이로 인해 reference counting이 발생하게 됩니다. 또한 dynamic dispatch로 메소드를 호출합니다.
+클래스의 성능은 다음과 같습니다. 클래스는 기본적으로 heap allocation을 사용하고, 이로 인해 reference counting이 발생하게 됩니다. 또한 dynamic dispatch로 메소드를 호출합니다. 하나의 메소드만 봤을 때, Dynamic dispatch는 static dispatch와 큰 차이는 없지만, 메소드 체인과 같은 여러 메소드가 얽혀있는 상황에서는 메소드 인라이닝과 같은 최적화를 할 수 없습니다.
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_3_dimensions_of_performance_1.png" width="800px">
@@ -499,7 +496,7 @@ for d in drawables {
 
 > #### Struct
 
-Struct의 성능은 다음과 같습니다.
+Struct의 성능은 다음과 같습니다. 
 
 <p align="center">
   <img src="/assets/images/understanding-swift-performance/3_3_dimensions_of_performance_3.png" width="800px">
