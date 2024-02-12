@@ -58,7 +58,7 @@ Swift Foundation **"overlay"**는 네이티브 Swift 인터페이스를 다른 �
 
 <br>
 
-**Briding**과 **overlay**에 대해 이해가 됐다면 이제 실제 사용되는 클래스인 `Notification`과 `NSNotification`의 차이를 살펴보도록 하겠습니다.
+**Bridging**과 **overlay**에 대해 이해가 됐다면 이제 실제 사용되는 클래스인 `Notification`과 `NSNotification`의 차이를 살펴보도록 하겠습니다.
 
 Swift에서 사용되는 Notification은 다음과 같이 정의되어있습니다.
 
