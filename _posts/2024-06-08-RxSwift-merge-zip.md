@@ -177,7 +177,11 @@ publishSubject2.onNext(4) // [3, 4]
 publishSubject1.onNext(5)
 ```
 
-Observable<[Int]>로 [Int] 형태의 값을 내보내지만, zip의 특성인 각 Observable의 일치하는 인덱스에서 방출하는 값들로 합쳐지는 것은 유지하고 있습니다.
+`Observable<[Int]>`로 [Int] 형태의 값을 내보내지만, zip의 특성인 각 Observable의 일치하는 인덱스에서 방출하는 값들로 합쳐지는 것은 유지하고 있습니다.
+
+
+
+따라서 zip은 튜플로도, 컬렉션 형태로도 처리될 수가 있다는 것을 확인할 수 있었습니다. 
 
 
 
